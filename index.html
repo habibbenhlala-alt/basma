@@ -1,30 +1,34 @@
 <!DOCTYPE html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>BASMA | بصمة</title>
 <style>
-:root{--g:#0b5d45;--g2:#14855f;--gl:#e3f3ec;--gold:#b8901c;--bg:#f4f8f6;--c:#fff;--tx:#12231c;--mu:#5d7168;--bd:#d9e4de;--rd:#b8372b}
+:root{--g:#0b5d45;--g2:#14855f;--gl:#e3f3ec;--gold:#b8901c;--bg:#f4f8f6;--c:#fff;--tx:#12231c;--mu:#5d7168;--bd:#d9e4de;--rd:#b8372b;--bt:#fff}
+:root[data-theme=dark]{--g:#2fae85;--g2:#3fc197;--gl:#173126;--gold:#e0b84a;--bg:#0d1612;--c:#16231e;--tx:#e8f2ed;--mu:#9bb0a6;--bd:#26372f;--rd:#e5776b;--bt:#062a1e;color-scheme:dark}
+[data-theme=dark] .tag.pending{background:#3a2f0e;color:#f0cf6a}[data-theme=dark] .tag.no{background:#3a1b17}
 *{box-sizing:border-box;margin:0}body{background:var(--bg);color:var(--tx);font:15px/1.6 "Segoe UI",Tahoma,"Noto Naskh Arabic",system-ui,sans-serif}
 #app{max-width:560px;margin:0 auto;min-height:100vh;padding-bottom:76px}
 .top{display:flex;justify-content:space-between;align-items:center;padding:12px 16px}.logo{font-weight:800;color:var(--g);font-size:18px}.logo small{color:var(--gold);margin-inline-start:6px}
 .pg{padding:4px 16px 16px}h2{font-size:19px;margin:14px 0 8px}h3{font-size:15px}
 .card{background:var(--c);border:1px solid var(--bd);border-radius:14px;padding:14px;margin:10px 0}
-.hero{color:#fff;border:0;background:repeating-radial-gradient(circle at 85% 20%,#ffffff14 0 3px,transparent 3px 11px),linear-gradient(135deg,var(--g),var(--g2))}
-[dir=ltr] .hero{background:repeating-radial-gradient(circle at 15% 20%,#ffffff14 0 3px,transparent 3px 11px),linear-gradient(135deg,var(--g),var(--g2))}
+.hero{color:#fff;border:0;background:repeating-radial-gradient(circle at 85% 20%,#ffffff14 0 3px,transparent 3px 11px),linear-gradient(135deg,#0b5d45,#14855f)}
+[dir=ltr] .hero{background:repeating-radial-gradient(circle at 15% 20%,#ffffff14 0 3px,transparent 3px 11px),linear-gradient(135deg,#0b5d45,#14855f)}
 .hero b{font-size:42px;line-height:1.1;display:block}.hero i{color:#f3d675;font-size:18px;font-style:normal}
-button{font:inherit;cursor:pointer;border:0;border-radius:12px;padding:10px 16px;background:var(--g);color:#fff;font-weight:600;min-height:44px}
+button{font:inherit;cursor:pointer;border:0;border-radius:12px;padding:10px 16px;background:var(--g);color:var(--bt);font-weight:600;min-height:44px}
 button.s{background:var(--gl);color:var(--g)}button.d{background:var(--rd)}button:disabled{opacity:.45}
 button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
-input,select,textarea{width:100%;font:inherit;padding:10px 12px;border:1px solid var(--bd);border-radius:10px;background:#fff;color:var(--tx);margin:4px 0 10px;min-height:44px}
+input,select,textarea{width:100%;font:inherit;padding:10px 12px;border:1px solid var(--bd);border-radius:10px;background:var(--c);color:var(--tx);margin:4px 0 10px;min-height:44px}
 label{font-size:13px;color:var(--mu);font-weight:600}.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.sp{justify-content:space-between}
 .tag{font-size:12px;padding:2px 10px;border-radius:20px;background:var(--gl);color:var(--g);font-weight:700}.tag.pending{background:#fdf1d3;color:#8a6500}.tag.no{background:#fbe3df;color:var(--rd)}
 .gd{color:var(--gold);font-weight:800}.mu{color:var(--mu);font-size:13px}.num{font-size:26px;font-weight:800;color:var(--g)}
-nav{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid var(--bd);z-index:9;padding-bottom:env(safe-area-inset-bottom,0)}
+nav{position:fixed;bottom:0;left:0;right:0;background:var(--c);border-top:1px solid var(--bd);z-index:9;padding-bottom:env(safe-area-inset-bottom,0)}
 nav div{display:flex;max-width:560px;margin:auto}nav button{flex:1;background:none;color:var(--mu);font-size:11px;padding:8px 2px;border-radius:0;display:flex;flex-direction:column;align-items:center}nav button span{font-size:20px}nav button.on{color:var(--g)}
 .bar{height:10px;background:var(--gl);border-radius:6px;overflow:hidden;margin:4px 0 10px}.bar i{display:block;height:100%;background:var(--g2)}
-.toast{position:fixed;bottom:90px;left:50%;transform:translateX(-50%);background:var(--tx);color:#fff;padding:10px 18px;border-radius:24px;z-index:20}
+.toast{position:fixed;bottom:90px;left:50%;transform:translateX(-50%);background:var(--tx);color:var(--bg);padding:10px 18px;border-radius:24px;z-index:20}
 .badges{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.bd{text-align:center;opacity:.35}.bd.on{opacity:1}.bd span{display:block;font-size:34px}
 .lg{text-align:center;padding:26px 10px}.lg .mark{font-size:54px}.lg h1{color:var(--g);font-size:34px}
 .ph{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:6px;margin:-14px -14px 10px;border-radius:14px 14px 0 0}.ph img{flex:0 0 100%;width:100%;max-height:340px;object-fit:cover;scroll-snap-align:center}
-.rx{display:flex;gap:6px;flex-wrap:wrap}.rx button{background:var(--gl);color:var(--tx);min-height:38px;padding:4px 12px}.rx button.on{background:var(--g);color:#fff}
+.rx{display:flex;gap:6px;flex-wrap:wrap}.rx button{background:var(--gl);color:var(--tx);min-height:38px;padding:4px 12px}.rx button.on{background:var(--g);color:var(--bt)}
 .pv{display:flex;gap:6px}.pv img{width:64px;height:64px;object-fit:cover;border-radius:8px}.ck{display:flex;gap:8px;align-items:flex-start;margin:8px 0}.ck input{width:22px;min-height:22px;margin:2px 0}
+.cam{display:flex;flex-direction:column;align-items:center;gap:4px;padding:26px;border:2px dashed var(--g2);border-radius:14px;color:var(--g);cursor:pointer;font-size:15px;margin-bottom:8px}.gl2{display:inline-block;margin:6px 0;color:var(--mu);cursor:pointer}
+.chips{margin:4px 0 10px}.chips button{background:var(--c);color:var(--mu);border:1px solid var(--bd);padding:6px 12px;min-height:36px;font-size:13px}.chips button.on{background:var(--g);color:var(--bt)}
 </style></head><body><div id="app"></div><div id="tt"></div>
 <script>
 const K={slogan:["كل مبادرة تصنع أثراً","Chaque initiative laisse une empreinte"],login:["دخول","Connexion"],reg:["إنشاء حساب","Créer un compte"],user:["المعرّف","Identifiant"],pw:["كلمة المرور","Mot de passe"],
@@ -40,7 +44,7 @@ logout:["خروج","Quitter"],report:["إبلاغ عن مشكل","Signaler un pr
 proto:["نموذج تجريبي: البيانات تُحفظ في هذا الجهاز فقط، وليست آمنة للاستعمال الحقيقي بعد.","Prototype : données stockées sur cet appareil uniquement, non sécurisées pour un usage réel."],
 newrew:["إضافة مكافأة","Ajouter une récompense"],rname:["اسم المكافأة","Nom"],rcost:["الكلفة بالنقاط","Coût en points"],sub:["المشاركون","Participants"],snt:["المبادرات المرسلة","Envoyées"],apr:["المعتمدة","Validées"],
 b1:["أول بصمة","Première empreinte"],b2:["3 مبادرات","3 initiatives"],b3:["100 نقطة","100 points"],b4:["حارس البيئة","Gardien de l'environnement"],hold:["لا توجد مبادرات بعد، أضف أول بصمة لك.","Aucune initiative : ajoutez votre première empreinte."],
-all:["الكل","Tous"],feed:["الواجهة","Fil"],photos:["صور (حتى 3، اختياري)","Photos (3 max, facultatif)"],
+all:["الكل","Tous"],feed:["الواجهة","Fil"],snap:["صوّر مبادرتك","Photographiez votre initiative"],gallery:["أو اختر من المعرض","ou choisir dans la galerie"],opt:["اختياري","facultatif"],needone:["أضف صورة أو عنواناً","Ajoutez une photo ou un titre"],photos:["صور (حتى 3، اختياري)","Photos (3 max, facultatif)"],
 consent:["أؤكد أن الصور بلا وجوه تلاميذ وأن النشر بموافقة الإدارة وولي الأمر","Je confirme : aucun visage d'élève et publication avec l'accord de l'administration et du parent"],
 needck:["أكّد الموافقة لإرسال الصور","Confirmez l'accord pour envoyer les photos"],pub:["نشر في واجهة المؤسسة","Publier dans le fil de l'établissement"],hide:["إخفاء","Masquer"],
 nofeed:["لا منشورات بعد","Aucune publication"],anon:["تلميذ من المؤسسة","Élève de l'établissement"],rxnote:["التفاعلات لا تمنح نقاطاً، النقاط من المشرف فقط.","Les réactions ne donnent pas de points ; seuls les encadrants en donnent."],ph_err:["تعذر قراءة الصورة","Image illisible"],full:["ذاكرة الجهاز ممتلئة","Mémoire pleine"],nsup:["لا طلبات تنتظر المراجعة.","Aucune demande en attente."]};
@@ -60,7 +64,7 @@ function setL(l){L=l;document.documentElement.lang=l;document.documentElement.di
 function go(x){S.tab=x;R()}
 const NAV={student:[['home','🏠'],['feed','📸'],['add','➕','add'],['mine','📋'],['rew','🎁']],sup:[['home','📥','queue'],['feed','📸'],['hist','🗂️']],dir:[['home','📊','stats'],['feed','📸']],adm:[['home','📊','stats'],['rew','🎁']]};
 const nav=()=>'<nav><div>'+NAV[S.u.role].map(n=>`<button class="${S.tab==n[0]?'on':''}" onclick="go('${n[0]}')"><span>${n[1]}</span>${t(n[2]||n[0])}</button>`).join('')+'</div></nav>';
-const topBar=()=>`<div class="top"><div class="logo">BASMA<small>بصمة</small></div><div class="row"><button class="s" style="min-height:36px;padding:4px 12px" onclick="setL('${L=='ar'?'fr':'ar'}')">${L=='ar'?'FR':'عربي'}</button>${S.u?`<button class="s" style="min-height:36px;padding:4px 12px" onclick="S.u=null;S.tab='home';R()">${t('logout')}</button>`:''}</div></div>`;
+const topBar=()=>`<div class="top"><div class="logo">BASMA<small>بصمة</small></div><div class="row"><button class="s" style="min-height:36px;padding:4px 12px" aria-label="theme" onclick="setTh('${TH=='dark'?'light':'dark'}')">${TH=='dark'?'☀️':'🌙'}</button><button class="s" style="min-height:36px;padding:4px 12px" onclick="setL('${L=='ar'?'fr':'ar'}')">${L=='ar'?'FR':'عربي'}</button>${S.u?`<button class="s" style="min-height:36px;padding:4px 12px" onclick="S.u=null;S.tab='home';R()">${t('logout')}</button>`:''}</div></div>`;
 function R(){const a=$('app');if(!S.u){a.innerHTML=topBar()+login();return}
 const v={student:stu,sup:sup,dir:dir,adm:adm}[S.u.role];a.innerHTML=topBar()+'<div class="pg">'+v()+`<p style="margin-top:18px"><button class="s" onclick="rep()">⚑ ${t('report')}</button></p></div>`+nav()}
 function login(){return`<div class="lg"><div class="mark">👣</div><h1>بصمة | BASMA</h1><p class="gd">${t('slogan')}</p></div><div class="pg"><div class="card">${S.reg?
@@ -79,15 +83,16 @@ const card=(i,x)=>`<div class="card">${gal(i)}<div class="row sp"><h3>${esc(i.ti
 function stu(){const u=S.u,mi=D.inits.filter(i=>i.sid==u.id),ok=mi.filter(i=>i.st=='ok');
 if(S.tab=='feed')return feed();
 if(S.tab=='home')return`<h2>${t('hi')} ${esc(u.name.split(' ')[0])}</h2><div class="card hero"><span>${t('bal')}</span><b>${bal(u.id)} <i>${t('pts')}</i></b><p>${ok.length} ${t('ok')}</p></div><button style="width:100%" onclick="go('add')">➕ ${t('add')}</button><button class="s" style="width:100%;margin-top:8px" onclick="go('ach')">🏅 ${t('ach')}</button>`+(mi.slice(-3).reverse().map(i=>card(i)).join('')||`<p class="mu" style="margin-top:12px">${t('hold')}</p>`);
-if(S.tab=='add')return`<h2>${t('add')}</h2><div class="card"><label>${t('title')}</label><input id="at" maxlength="120"><label>${t('cat')}</label><select id="ac">${['env','soc','cul','civ'].map(c=>`<option value="${c}">${t(c)}</option>`).join('')}</select><label>${t('desc')}</label><textarea id="ad" rows="3" maxlength="1000"></textarea><label>${t('date')}</label><input id="ada" type="date" value="${new Date().toISOString().slice(0,10)}"><label>${t('photos')}</label><input id="af" type="file" accept="image/*" multiple onchange="pick(this)"><div id="pv" class="pv"></div><label class="ck" id="ckw" style="display:none"><input id="ack" type="checkbox"><span>${t('consent')}</span></label><p class="mu">${t('note')}</p><button onclick="addI()">${t('send')}</button></div>`;
+if(S.tab=='add')return`<h2>${t('add')}</h2><div class="card"><label class="cam"><span style="font-size:42px">📷</span><b>${t('snap')}</b><input id="af" type="file" accept="image/*" capture="environment" hidden onchange="pick(this)"></label><div id="pv" class="pv">${PH.map(x=>`<img src="${x}" alt="">`).join('')}</div><label class="gl2"><input id="ag" type="file" accept="image/*" multiple hidden onchange="pick(this)"><u>${t('gallery')}</u></label><label class="ck" id="ckw" style="display:${PH.length?'flex':'none'}"><input id="ack" type="checkbox"><span>${t('consent')}</span></label><label>${t('title')} (${t('opt')})</label><input id="at" maxlength="120"><div class="row chips">${['env','soc','cul','civ'].map(c=>`<button class="${CT==c?'on':''}" onclick="setCat('${c}',this)">${t(c)}</button>`).join('')}</div><label>${t('desc')} (${t('opt')})</label><textarea id="ad" rows="2" maxlength="1000"></textarea><button style="width:100%" onclick="addI()">${t('send')}</button></div>`;
 if(S.tab=='mine')return`<h2>${t('mine')}</h2>`+(mi.slice().reverse().map(i=>card(i)).join('')||`<p class="mu">${t('hold')}</p>`);
 if(S.tab=='rew')return`<h2>${t('rew')}</h2><div class="card hero"><b>${bal(u.id)} <i>${t('pts')}</i></b></div>`+D.rewards.map(r=>`<div class="card row sp"><div><h3>${esc(nm(r))}</h3><span class="mu">${t('cost')}: ${r.cost}</span></div><button ${bal(u.id)<r.cost||r.st<1?'disabled':''} onclick="redeem(${r.id})">${t('redeem')}</button></div>`).join('');
 const n=ok.length,e=earned(u.id),en=ok.filter(i=>i.cat=='env').length,b=[[n>=1,'🌱','b1'],[n>=3,'⭐','b2'],[e>=100,'🏆','b3'],[en>=2,'🌳','b4']];
 return`<h2>${t('ach')}</h2><div class="badges">${b.map(x=>`<div class="card bd ${x[0]?'on':''}"><span>${x[1]}</span>${t(x[2])}</div>`).join('')}</div>`}
-function addI(){const ti=val('at').trim();if(ti.length<3){toast(t('fill'));return}
-if(D.inits.some(i=>i.sid==S.u.id&&i.title==ti&&i.date==val('ada'))){toast(t('dup'));return}
+function addI(){let ti=val('at').trim();if(!ti&&!PH.length){toast(t('needone'));return}
 if(PH.length&&!($('ack')||{}).checked){toast(t('needck'));return}
-D.inits.push({id:D.nid++,sid:S.u.id,title:ti,cat:val('ac'),desc:val('ad').trim(),date:val('ada'),st:'pending',pts:0,imgs:PH.slice(0,3)});PH=[];save();S.tab='mine';R();toast(t('sent'))}
+if(!ti)ti=t(CT);const dt=new Date().toISOString().slice(0,10);
+if(!PH.length&&D.inits.some(i=>i.sid==S.u.id&&i.title==ti&&i.date==dt)){toast(t('dup'));return}
+D.inits.push({id:D.nid++,sid:S.u.id,title:ti.slice(0,120),cat:CT,desc:val('ad').trim(),date:dt,st:'pending',pts:0,imgs:PH.slice(0,3)});PH=[];CT='env';save();S.tab='mine';R();toast(t('sent'))}
 function redeem(id){const r=D.rewards.find(x=>x.id==id);if(!r||r.st<1||bal(S.u.id)<r.cost){toast(t('lack'));return}
 r.st--;D.reds.push({sid:S.u.id,rid:id,cost:r.cost});save();R();toast(t('done'))}
 function sup(){const mine=D.inits.filter(i=>usr(i.sid)&&usr(i.sid).sch==S.u.sch);if(S.tab=='feed')return feed();
@@ -102,14 +107,9 @@ const dir=()=>S.tab=='feed'?feed():`<h2>${t('stats')}</h2>`+stats(S.u.sch);
 function adm(){if(S.tab=='rew')return`<h2>${t('newrew')}</h2><div class="card"><label>${t('rname')}</label><input id="nn" maxlength="60"><label>${t('rcost')}</label><input id="nc" type="number" min="1" max="1000"><button onclick="addR()">${t('newrew')}</button></div>`+D.rewards.map(r=>`<div class="card row sp"><span>${esc(nm(r))}</span><b>${r.cost}</b></div>`).join('');
 return`<h2>${t('stats')}</h2>`+stats(null)+`<h2>${t('reps')}</h2>`+(D.reps.map(r=>`<div class="card"><p>${esc(r.m)}</p><p class="mu">${esc(r.by)}</p></div>`).join('')||`<p class="mu">${t('empty')}</p>`)}
 function addR(){const n=val('nn').trim(),c=Math.round(+val('nc'));if(!n||!(c>=1)||S.u.role!='adm'){toast(t('fill'));return}D.rewards.push({id:D.nid++,n:[n,n],cost:c,st:50});save();R()}
-let PH=[];const RX=['❤️','😂','👏','🌱'];
-function pick(el){PH=[];const fs=[...el.files].slice(0,3);let n=0;if(!fs.length){$('pv').innerHTML='';$('ckw').style.display='none';return}
-fs.forEach(f=>{const r=new FileReader();r.onload=()=>{const im=new Image();im.onload=()=>{const k=Math.min(1,720/Math.max(im.width,im.height)),c=document.createElement('canvas');c.width=Math.round(im.width*k);c.height=Math.round(im.height*k);c.getContext('2d').drawImage(im,0,0,c.width,c.height);PH.push(c.toDataURL('image/jpeg',.6));
-if(++n==fs.length){$('pv').innerHTML=PH.map(s=>`<img src="${s}" alt="">`).join('');$('ckw').style.display='flex'}};im.onerror=()=>toast(t('ph_err'));im.src=r.result};r.readAsDataURL(f)})}
-function feed(){const u=S.u,staff=u.role=='sup'||u.role=='dir',ps=D.inits.filter(i=>i.pub&&i.st=='ok'&&usr(i.sid)&&usr(i.sid).sch==u.sch).reverse();
-return`<h2>${t('feed')}</h2><p class="mu">${t('rxnote')}</p>`+(ps.map(i=>{const rx=i.rx||{};return`<div class="card">${gal(i)}<h3>${esc(i.title)}</h3><p class="mu">${t(i.cat)} • ${t('anon')}</p>${i.desc?`<p>${esc(i.desc)}</p>`:''}<div class="rx">${RX.map(e=>{const n=Object.values(rx).filter(v=>v==e).length;return`<button class="${rx[u.id]==e?'on':''}" onclick="react(${i.id},'${e}')">${e} ${n||''}</button>`}).join('')}</div>${staff?`<p style="margin-top:8px"><button class="s" onclick="hide(${i.id})">${t('hide')}</button></p>`:''}</div>`}).join('')||`<p class="mu">${t('nofeed')}</p>`)}
-function react(id,e){const i=D.inits.find(x=>x.id==id),u=S.u;if(!i||!i.pub||i.st!='ok'||usr(i.sid).sch!=u.sch||!RX.includes(e))return;i.rx=i.rx||{};if(i.rx[u.id]==e)delete i.rx[u.id];else i.rx[u.id]=e;save();R()}
-function hide(id){const i=D.inits.find(x=>x.id==id);if(!i||!(S.u.role=='sup'||S.u.role=='dir')||usr(i.sid).sch!=S.u.sch)return;i.pub=false;save();R()}
-R();
-</script></body></html>
-
+let TH=null;try{TH=localStorage.getItem('basma_theme')}catch(e){}
+if(!TH)TH=(typeof matchMedia=='function'&&matchMedia('(prefers-color-scheme:dark)').matches)?'dark':'light';
+document.documentElement.dataset.theme=TH;
+function setTh(x){TH=x;document.documentElement.dataset.theme=x;try{localStorage.setItem('basma_theme',x)}catch(e){}R()}
+let PH=[],CT='env';const RX=['❤️','😂','👏','🌱'];
+function setCat(c,el){CT=c;[...el.parentNode.children].forEach(b=>b.classList.toggle('on',
