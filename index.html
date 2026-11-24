@@ -112,4 +112,13 @@ if(!TH)TH=(typeof matchMedia=='function'&&matchMedia('(prefers-color-scheme:dark
 document.documentElement.dataset.theme=TH;
 function setTh(x){TH=x;document.documentElement.dataset.theme=x;try{localStorage.setItem('basma_theme',x)}catch(e){}R()}
 let PH=[],CT='env';const RX=['❤️','😂','👏','🌱'];
-function setCat(c,el){CT=c;[...el.parentNode.children].forEach(b=>b.classList.toggle('on',
+function setCat(c,el){CT=c;[...el.parentNode.children].forEach(b=>b.classList.toggle('on',b==el))}
+function show(){$('pv').innerHTML=PH.map(x=>`<img src="${x}" alt="">`).join('');$('ckw').style.display=PH.length?'flex':'none'}
+function pick(el){const fs=[...el.files].slice(0,3-PH.length);el.value='';let n=0;if(!fs.length)return;
+fs.forEach(f=>{const r=new FileReader();r.onload=()=>{const im=new Image();im.onload=()=>{const k=Math.min(1,720/Math.max(im.width,im.height)),c=document.createElement('canvas');c.width=Math.round(im.width*k);c.height=Math.round(im.height*k);c.getContext('2d').drawImage(im,0,0,c.width,c.height);PH.push(c.toDataURL('image/jpeg',.6));if(++n==fs.length)show()};im.onerror=()=>toast(t('ph_err'));im.src=r.result};r.readAsDataURL(f)})}
+function feed(){const u=S.u,staff=u.role=='sup'||u.role=='dir',ps=D.inits.filter(i=>i.pub&&i.st=='ok'&&usr(i.sid)&&usr(i.sid).sch==u.sch).reverse();
+return`<h2>${t('feed')}</h2><p class="mu">${t('rxnote')}</p>`+(ps.map(i=>{const rx=i.rx||{};return`<div class="card">${gal(i)}<h3>${esc(i.title)}</h3><p class="mu">${t(i.cat)} • ${t('anon')}</p>${i.desc?`<p>${esc(i.desc)}</p>`:''}<div class="rx">${RX.map(e=>{const n=Object.values(rx).filter(v=>v==e).length;return`<button class="${rx[u.id]==e?'on':''}" onclick="react(${i.id},'${e}')">${e} ${n||''}</button>`}).join('')}</div>${staff?`<p style="margin-top:8px"><button class="s" onclick="hide(${i.id})">${t('hide')}</button></p>`:''}</div>`}).join('')||`<p class="mu">${t('nofeed')}</p>`)}
+function react(id,e){const i=D.inits.find(x=>x.id==id),u=S.u;if(!i||!i.pub||i.st!='ok'||usr(i.sid).sch!=u.sch||!RX.includes(e))return;i.rx=i.rx||{};if(i.rx[u.id]==e)delete i.rx[u.id];else i.rx[u.id]=e;save();R()}
+function hide(id){const i=D.inits.find(x=>x.id==id);if(!i||!(S.u.role=='sup'||S.u.role=='dir')||usr(i.sid).sch!=S.u.sch)return;i.pub=false;save();R()}
+R();
+</script></body></html>
