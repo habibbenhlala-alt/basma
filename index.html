@@ -109,4 +109,3 @@ async function init(){try{await loadInstitutions();const {data:{session}}=await 
 db.auth.onAuthStateChange(async(_event,session)=>{if(session&&!S.profile){setTimeout(()=>refreshSession(),0)}else if(!session){S.user=null;S.profile=null;render()}});
 init();
 </script></body></html>
-
