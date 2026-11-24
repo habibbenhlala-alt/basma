@@ -1,129 +1,97 @@
 <!DOCTYPE html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>BASMA | بصمة</title>
 <style>
-:root{--g:#0b5d45;--g2:#14855f;--gl:#e3f3ec;--gold:#b8901c;--bg:#f4f8f6;--c:#fff;--tx:#12231c;--mu:#5d7168;--bd:#d9e4de;--rd:#b8372b;--r:14px}
-@media(prefers-color-scheme:dark){:root{--g:#2fae85;--g2:#3fc197;--gl:#173126;--gold:#e0b84a;--bg:#0d1612;--c:#16231e;--tx:#e8f2ed;--mu:#9bb0a6;--bd:#26372f;--rd:#e5776b}}
-*{box-sizing:border-box;margin:0}html,body{height:100%}
-body{background:var(--bg);color:var(--tx);font:15px/1.6 "Segoe UI",Tahoma,"Noto Naskh Arabic",system-ui,sans-serif}
-#app{max-width:560px;margin:0 auto;min-height:100%;padding-bottom:76px;padding-top:env(safe-area-inset-top,0)}
-.top{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;position:sticky;top:0;background:var(--bg);z-index:5}
-.logo{font-weight:800;color:var(--g);font-size:18px}.logo small{color:var(--gold);font-weight:600;margin-inline-start:6px}
+:root{--g:#0b5d45;--g2:#14855f;--gl:#e3f3ec;--gold:#b8901c;--bg:#f4f8f6;--c:#fff;--tx:#12231c;--mu:#5d7168;--bd:#d9e4de;--rd:#b8372b}
+*{box-sizing:border-box;margin:0}body{background:var(--bg);color:var(--tx);font:15px/1.6 "Segoe UI",Tahoma,"Noto Naskh Arabic",system-ui,sans-serif}
+#app{max-width:560px;margin:0 auto;min-height:100vh;padding-bottom:76px}
+.top{display:flex;justify-content:space-between;align-items:center;padding:12px 16px}.logo{font-weight:800;color:var(--g);font-size:18px}.logo small{color:var(--gold);margin-inline-start:6px}
 .pg{padding:4px 16px 16px}h2{font-size:19px;margin:14px 0 8px}h3{font-size:15px}
-.card{background:var(--c);border:1px solid var(--bd);border-radius:var(--r);padding:14px;margin:10px 0}
-.hero{background:linear-gradient(135deg,var(--g),var(--g2));color:#fff;border:0}.hero b{font-size:40px;line-height:1.1;display:block}
-.hero .gold{color:#f3d675}
-button,.btn{font:inherit;cursor:pointer;border:0;border-radius:12px;padding:10px 16px;background:var(--g);color:#fff;font-weight:600;min-height:44px}
-button.s{background:var(--gl);color:var(--g)}button.d{background:var(--rd)}button.w{background:#fff;color:var(--g)}button:disabled{opacity:.5}
+.card{background:var(--c);border:1px solid var(--bd);border-radius:14px;padding:14px;margin:10px 0}
+.hero{color:#fff;border:0;background:repeating-radial-gradient(circle at 85% 20%,#ffffff14 0 3px,transparent 3px 11px),linear-gradient(135deg,var(--g),var(--g2))}
+[dir=ltr] .hero{background:repeating-radial-gradient(circle at 15% 20%,#ffffff14 0 3px,transparent 3px 11px),linear-gradient(135deg,var(--g),var(--g2))}
+.hero b{font-size:42px;line-height:1.1;display:block}.hero i{color:#f3d675;font-size:18px;font-style:normal}
+button{font:inherit;cursor:pointer;border:0;border-radius:12px;padding:10px 16px;background:var(--g);color:#fff;font-weight:600;min-height:44px}
+button.s{background:var(--gl);color:var(--g)}button.d{background:var(--rd)}button:disabled{opacity:.45}
 button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
-input,select,textarea{width:100%;font:inherit;padding:10px 12px;border:1px solid var(--bd);border-radius:10px;background:var(--c);color:var(--tx);margin:4px 0 10px;min-height:44px}
-label{font-size:13px;color:var(--mu);font-weight:600}.row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.sp{justify-content:space-between}
-.tag{font-size:12px;padding:2px 10px;border-radius:20px;background:var(--gl);color:var(--g);font-weight:700}
-.tag.pending{background:#fdf1d3;color:#8a6500}.tag.edit{background:#e3ecfb;color:#254a96}.tag.no{background:#fbe3df;color:var(--rd)}
-.gd{color:var(--gold);font-weight:800}.mu{color:var(--mu);font-size:13px}
-nav{position:fixed;bottom:0;left:0;right:0;background:var(--c);border-top:1px solid var(--bd);display:flex;justify-content:center;padding-bottom:env(safe-area-inset-bottom,0);z-index:9}
-nav div{display:flex;max-width:560px;width:100%}nav button{flex:1;background:none;color:var(--mu);font-size:11px;padding:8px 2px;border-radius:0;display:flex;flex-direction:column;align-items:center;gap:0}
-nav button span{font-size:20px}nav button.on{color:var(--g)}
-.bar{height:10px;background:var(--gl);border-radius:6px;overflow:hidden}.bar i{display:block;height:100%;background:var(--g2);border-radius:6px;transition:width .5s}
-.bar.gold i{background:var(--gold)}.chips button{background:var(--c);color:var(--mu);border:1px solid var(--bd);padding:6px 12px;min-height:36px;font-size:13px}.chips button.on{background:var(--g);color:#fff}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.grid .card{margin:0}.num{font-size:26px;font-weight:800;color:var(--g)}
-.toast{position:fixed;bottom:90px;left:50%;transform:translateX(-50%);background:var(--tx);color:var(--bg);padding:10px 18px;border-radius:24px;z-index:20;font-size:14px}
-.splash{height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(160deg,#073d2e,var(--g2));color:#fff;text-align:center;padding:20px}
-.splash .mark{width:96px;height:96px;border-radius:28px;background:#fff;color:var(--g);display:grid;place-items:center;font-size:52px;animation:pop .9s ease both}
-@keyframes pop{from{transform:scale(.4) rotate(-12deg);opacity:0}to{transform:none;opacity:1}}
-.splash h1{font-size:40px;margin-top:16px;letter-spacing:1px}.splash p{opacity:.9;margin-top:6px}
-.cam{display:flex;flex-direction:column;align-items:center;gap:4px;padding:26px;border:2px dashed var(--g2);border-radius:var(--r);cursor:pointer;color:var(--g);text-align:center}.tiles{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0}button.tile{background:var(--c);color:var(--tx);border:1px solid var(--bd);border-radius:18px;padding:14px;min-height:108px;display:flex;flex-direction:column;justify-content:space-between;align-items:flex-start;text-align:start;font-weight:700}button.tile span{font-size:30px}button.tile small{color:var(--mu);font-weight:500}button.tile.pri{background:var(--g);color:#fff;grid-column:1/-1;flex-direction:row;align-items:center;min-height:84px}button.tile.pri small{color:#e3f3ec}.badge{text-align:center;opacity:.35}.badge.on{opacity:1}.badge span{display:block;font-size:30px}
-@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+input,select,textarea{width:100%;font:inherit;padding:10px 12px;border:1px solid var(--bd);border-radius:10px;background:#fff;color:var(--tx);margin:4px 0 10px;min-height:44px}
+label{font-size:13px;color:var(--mu);font-weight:600}.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.sp{justify-content:space-between}
+.tag{font-size:12px;padding:2px 10px;border-radius:20px;background:var(--gl);color:var(--g);font-weight:700}.tag.pending{background:#fdf1d3;color:#8a6500}.tag.no{background:#fbe3df;color:var(--rd)}
+.gd{color:var(--gold);font-weight:800}.mu{color:var(--mu);font-size:13px}.num{font-size:26px;font-weight:800;color:var(--g)}
+nav{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid var(--bd);z-index:9;padding-bottom:env(safe-area-inset-bottom,0)}
+nav div{display:flex;max-width:560px;margin:auto}nav button{flex:1;background:none;color:var(--mu);font-size:11px;padding:8px 2px;border-radius:0;display:flex;flex-direction:column;align-items:center}nav button span{font-size:20px}nav button.on{color:var(--g)}
+.bar{height:10px;background:var(--gl);border-radius:6px;overflow:hidden;margin:4px 0 10px}.bar i{display:block;height:100%;background:var(--g2)}
+.toast{position:fixed;bottom:90px;left:50%;transform:translateX(-50%);background:var(--tx);color:#fff;padding:10px 18px;border-radius:24px;z-index:20}
+.badges{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.bd{text-align:center;opacity:.35}.bd.on{opacity:1}.bd span{display:block;font-size:34px}
+.lg{text-align:center;padding:26px 10px}.lg .mark{font-size:54px}.lg h1{color:var(--g);font-size:34px}
 </style></head><body><div id="app"></div><div id="tt"></div>
 <script>
-const K={
-app:["بصمة","BASMA"],slogan:["كل مبادرة تصنع أثراً","Chaque initiative laisse une empreinte"],
-login:["تسجيل الدخول","Connexion"],reg:["إنشاء حساب","Créer un compte"],user:["المعرّف","Identifiant"],pw:["كلمة المرور","Mot de passe"],
-bad:["بيانات الدخول غير صحيحة","Identifiants incorrects"],demo:["حسابات تجريبية (كلمة المرور 1234)","Comptes démo (mot de passe 1234)"],
-r_student:["تلميذ","Élève"],r_sup:["مشرف تربوي","Encadrant"],r_dir:["مدير المؤسسة","Directeur"],r_adm:["مدير النظام","Administrateur"],
-name:["الاسم الكامل","Nom complet"],school:["المؤسسة","Établissement"],regok:["تم إنشاء الحساب، يمكنك الدخول","Compte créé, connectez-vous"],
-fill:["أكمل الحقول المطلوبة","Remplissez les champs requis"],
-hi:["مرحباً","Bonjour"],solde:["رصيد بصمة | Solde BASMA","Solde BASMA"],pts:["نقطة","pts"],apprd:["مبادرات معتمدة","initiatives validées"],
-add:["أضف مبادرة","Ajouter une initiative"],last:["آخر الإنجازات","Derniers accomplissements"],sugg:["مكافآت مقترحة","Récompenses suggérées"],none:["لا شيء بعد","Rien pour l'instant"],
-home:["الرئيسية","Accueil"],mine:["مبادراتي","Mes initiatives"],rew:["المكافآت","Récompenses"],ach:["الإنجازات","Succès"],set:["الإعدادات","Réglages"],
-queue:["الطلبات","Demandes"],hist:["السجل","Historique"],stats:["الإحصائيات","Statistiques"],team:["المشرفون","Encadrants"],
-orgs:["المؤسسات","Établissements"],rules:["النقاط والمكافآت","Points & récompenses"],users:["الحسابات","Comptes"],reports:["البلاغات","Signalements"],
-title:["عنوان المبادرة","Titre de l'initiative"],cat:["التصنيف","Catégorie"],type:["نوع المبادرة","Type d'initiative"],other:["مبادرة مقترحة جديدة","Nouvelle initiative proposée"],
-desc:["وصف النشاط","Description"],date:["تاريخ الإنجاز","Date de réalisation"],proof:["إثبات اختياري (دون وجوه تلاميذ)","Preuve facultative (sans visages d'élèves)"],
-group:["مبادرة جماعية","Initiative collective"],send:["إرسال للمراجعة","Envoyer pour validation"],sent:["تم الإرسال للمراجعة","Envoyé pour validation"],
-dup:["هذه المبادرة مسجلة من قبل","Cette initiative existe déjà"],ptsnote:["النقاط يحددها المشرف بعد المصادقة، ولا تُمنح آلياً.","Les points sont fixés par l'encadrant après validation, jamais automatiquement."],
-env:["بيئية","Environnement"],soc:["اجتماعية","Social"],cul:["تربوية وثقافية","Éducatif & culturel"],civ:["مواطنة","Citoyenneté"],
-all:["الكل","Tous"],pending:["قيد المراجعة","En cours"],ok:["مقبولة","Validée"],edit:["تحتاج إلى تعديل","À modifier"],no:["مرفوضة","Refusée"],
-reason:["السبب","Motif"],resub:["تعديل وإعادة الإرسال","Modifier et renvoyer"],save:["حفظ","Enregistrer"],
-cost:["الكلفة","Coût"],redeem:["استبدال","Échanger"],noenough:["رصيدك لا يكفي","Solde insuffisant"],redok:["تم الاستبدال","Échange effectué"],
-rlog:["سجل الاستبدال","Historique des échanges"],partner:["الشريك","Partenaire"],optional:["المشاركة اختيارية والمكافآت ليست شرطاً للمبادرة.","La participation est volontaire; les récompenses ne sont pas une condition."],
-level:["المستوى","Niveau"],badges:["شارات التقدير","Badges"],collective:["إنجاز المؤسسة الجماعي","Succès collectif de l'établissement"],
-b1:["أول بصمة","Première empreinte"],b2:["ثلاث مبادرات","Trois initiatives"],b3:["100 نقطة","100 points"],b4:["روح الفريق","Esprit d'équipe"],b5:["حارس البيئة","Gardien de l'environnement"],
-approve:["اعتماد","Valider"],askedit:["طلب تعديل","Demander modif."],reject:["رفض","Refuser"],pgrant:["النقاط الممنوحة","Points accordés"],
-rsn:["اكتب السبب (إجباري)","Motif (obligatoire)"],by:["من","Par"],back:["رجوع","Retour"],empty:["لا توجد طلبات حالياً","Aucune demande"],
-sub:["المشاركون","Participants"],sent2:["المبادرات المرسلة","Envoyées"],apr2:["المعتمدة","Validées"],grp:["نسبة الجماعية","Part collective"],
-bycat:["التوزيع حسب التصنيف","Répartition par catégorie"],acts:["أنشطة المؤسسة للمصادقة","Activités à valider"],
-lang:["اللغة","Langue"],logout:["تسجيل الخروج","Déconnexion"],rep:["الإبلاغ عن خطأ أو محتوى غير مناسب","Signaler un problème ou contenu inapproprié"],
-repok:["شكراً، وصل البلاغ للإدارة","Merci, signalement transmis"],priv:["الخصوصية: لا تُنشر بيانات التلاميذ ولا ترتيب علني. لا تُجمع بيانات حساسة.","Confidentialité: aucune donnée d'élève publique ni classement public. Aucune donnée sensible collectée."],
-proto:["نموذج أولي: بيانات تجريبية في ذاكرة المتصفح فقط. الإنتاج يتطلب خادماً وقاعدة بيانات ومصادقة آمنة وموافقات الأولياء.","Prototype: données fictives en mémoire du navigateur. La production exige serveur, base de données, authentification sécurisée et accords parentaux."],
-newsch:["إضافة مؤسسة","Ajouter un établissement"],newrew:["إضافة مكافأة","Ajouter une récompense"],newsup:["إضافة مشرف","Ajouter un encadrant"],
-tot:["إجمالي","Total"],stock:["المخزون","Stock"],active:["نشط","Actif"],pwn:["نقاط افتراضية","Points par défaut"],
-done:["تم","Fait"],snap:["صوّر عملك الخيري","Photographiez votre action"],note:["جملة قصيرة (اختياري)","Une courte phrase (facultatif)"],autodate:["التاريخ والوقت يُسجَّلان تلقائياً لحظة الإرسال","Date et heure enregistrées automatiquement à l'envoi"],faces:["تجنّب تصوير الوجوه","Évitez de photographier les visages"],needph:["التقط صورة أولاً","Prenez d'abord une photo"],anon:["تلميذ مجهول","Élève anonyme"],notif:["إشعار","Notification"],newb:["بصمة جديدة بانتظار المراجعة","Nouvelle empreinte à valider"],decl:["تم تسجيل القرار","Décision enregistrée"],ver:["اعتماد","Valider"]};
-let L='ar';const t=k=>(K[k]||[k,k])[L=='ar'?0:1];const nm=o=>o.n[L=='ar'?0:1];
+const K={slogan:["كل مبادرة تصنع أثراً","Chaque initiative laisse une empreinte"],login:["دخول","Connexion"],reg:["إنشاء حساب","Créer un compte"],user:["المعرّف","Identifiant"],pw:["كلمة المرور","Mot de passe"],
+bad:["بيانات غير صحيحة","Identifiants incorrects"],demo:["حسابات تجريبية (كلمة المرور 1234)","Comptes démo (mot de passe 1234)"],student:["تلميذ","Élève"],sup:["مشرف","Encadrant"],dir:["مدير المؤسسة","Directeur"],adm:["مدير النظام","Admin"],
+name:["الاسم الكامل","Nom complet"],school:["المؤسسة","Établissement"],fill:["أكمل الحقول (كلمة المرور 4 أحرف على الأقل)","Remplissez les champs (mot de passe 4 car. min.)"],hi:["مرحباً","Bonjour"],
+bal:["رصيد بصمة","Solde BASMA"],pts:["نقطة","pts"],add:["أضف مبادرة","Ajouter une initiative"],mine:["مبادراتي","Mes initiatives"],rew:["المكافآت","Récompenses"],ach:["الإنجازات","Succès"],
+home:["الرئيسية","Accueil"],queue:["الطلبات","Demandes"],hist:["السجل","Historique"],stats:["الإحصائيات","Statistiques"],title:["عنوان المبادرة","Titre"],cat:["التصنيف","Catégorie"],desc:["وصف النشاط","Description"],
+date:["تاريخ الإنجاز","Date"],send:["إرسال للمراجعة","Envoyer pour validation"],sent:["تم الإرسال للمراجعة","Envoyé pour validation"],dup:["مبادرة مسجلة من قبل","Initiative déjà enregistrée"],
+note:["النقاط يحددها المشرف بعد المصادقة فقط.","Les points sont fixés par l'encadrant après validation."],env:["بيئية","Environnement"],soc:["اجتماعية","Social"],cul:["تربوية وثقافية","Éducatif & culturel"],civ:["مواطنة","Citoyenneté"],
+pending:["قيد المراجعة","En attente"],ok:["مقبولة","Validée"],no:["مرفوضة","Refusée"],reason:["السبب","Motif"],cost:["الكلفة","Coût"],redeem:["استبدال","Échanger"],lack:["رصيدك لا يكفي","Solde insuffisant"],
+done:["تم الاستبدال","Échange effectué"],approve:["اعتماد","Valider"],reject:["رفض","Refuser"],giv:["النقاط","Points"],rsn:["سبب الرفض (إجباري)","Motif du refus (obligatoire)"],empty:["لا شيء حالياً","Rien pour l'instant"],
+logout:["خروج","Quitter"],report:["إبلاغ عن مشكل","Signaler un problème"],repq:["صف المشكل:","Décrivez le problème :"],repok:["وصل البلاغ","Signalement transmis"],reps:["البلاغات","Signalements"],
+proto:["نموذج تجريبي: البيانات تُحفظ في هذا الجهاز فقط، وليست آمنة للاستعمال الحقيقي بعد.","Prototype : données stockées sur cet appareil uniquement, non sécurisées pour un usage réel."],
+newrew:["إضافة مكافأة","Ajouter une récompense"],rname:["اسم المكافأة","Nom"],rcost:["الكلفة بالنقاط","Coût en points"],sub:["المشاركون","Participants"],snt:["المبادرات المرسلة","Envoyées"],apr:["المعتمدة","Validées"],
+b1:["أول بصمة","Première empreinte"],b2:["3 مبادرات","3 initiatives"],b3:["100 نقطة","100 points"],b4:["حارس البيئة","Gardien de l'environnement"],hold:["لا توجد مبادرات بعد، أضف أول بصمة لك.","Aucune initiative : ajoutez votre première empreinte."],
+all:["الكل","Tous"],nsup:["لا طلبات تنتظر المراجعة.","Aucune demande en attente."]};
+let L='ar',S={u:null,tab:'home',reg:0};const KEY='basma_v1';
+const seed=()=>({schools:[{id:1,n:["المعهد الثانوي بزغوان","Lycée de Zaghouan"]},{id:2,n:["المعهد الثانوي بالفحص","Lycée d'El Fahs"]}],
+users:[{id:1,u:'eleve',name:'Yasmine Ben Salah',role:'student',sch:1,pw:'1234'},{id:2,u:'encadrant',name:'Mme Hela Mansouri',role:'sup',sch:1,pw:'1234'},{id:3,u:'directeur',name:'M. Karim Gharbi',role:'dir',sch:1,pw:'1234'},{id:4,u:'admin',name:'Admin BASMA',role:'adm',sch:0,pw:'1234'}],
+inits:[],reds:[],reps:[],nid:10,rewards:[{id:1,n:["شهادة تقدير","Certificat de mérite"],cost:50,st:99},{id:2,n:["حقيبة أدوات مدرسية","Pack fournitures"],cost:80,st:6},{id:3,n:["رحلة تربوية","Sortie éducative"],cost:150,st:20}]});
+let D=null;try{D=JSON.parse(localStorage.getItem(KEY))}catch(e){}if(!D||!D.users)D=seed();
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(D))}catch(e){}};
+const $=id=>document.getElementById(id),t=k=>{const v=K[k];return v?v[L=='ar'?0:1]:k},nm=o=>o.n[L=='ar'?0:1];
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-let D={
-schools:[{id:1,n:["المعهد الثانوي بزغوان","Lycée de Zaghouan"]},{id:2,n:["المعهد الثانوي بالفحص","Lycée d'El Fahs"]}],
-users:[{id:1,u:'eleve',name:'Yasmine Ben Salah',role:'student',sch:1},{id:2,u:'eleve2',name:'Amine Trabelsi',role:'student',sch:1},{id:3,u:'eleve3',name:'Ons Jlassi',role:'student',sch:1},
-{id:4,u:'encadrant',name:'Mme Hela Mansouri',role:'sup',sch:1},{id:5,u:'directeur',name:'M. Karim Gharbi',role:'dir',sch:1},{id:6,u:'admin',name:'Admin BASMA',role:'adm',sch:0}],
-types:[{id:1,cat:'env',n:["المشاركة في حملة تنظيف","Campagne de nettoyage"],p:20},{id:2,cat:'env',n:["غراسة شجرة","Plantation d'arbre"],p:30},{id:3,cat:'env',n:["حملة فرز وإعادة تدوير","Tri et recyclage"],p:25},
-{id:4,cat:'soc',n:["مساعدة زملاء دراسياً","Soutien scolaire entre pairs"],p:20},{id:5,cat:'soc',n:["جمع كتب وأدوات مدرسية","Collecte de livres et fournitures"],p:25},
-{id:6,cat:'cul',n:["تنظيم نادي قراءة","Club de lecture"],p:25},{id:7,cat:'cul',n:["تنظيم حملة توعية","Campagne de sensibilisation"],p:30},
-{id:8,cat:'civ',n:["اقتراح حل لمشكلة مدرسية","Proposer une solution scolaire"],p:20}],
-inits:[{id:1,sid:1,title:"غراسة أشجار بساحة المعهد",cat:'env',type:2,desc:"غرسنا 5 شجيرات بالتنسيق مع الإدارة.",date:'2026-11-05',st:'ok',pts:40,grp:1},
-{id:2,sid:1,title:"Club de lecture du jeudi",cat:'cul',type:6,desc:"Séance de lecture avec 8 camarades.",date:'2026-11-12',st:'ok',pts:25,grp:0},
-{id:3,sid:1,title:"حملة فرز النفايات بالقسم",cat:'env',type:3,desc:"وضعنا حاويات فرز في القسم.",date:'2026-11-20',st:'pending',pts:0,grp:1},
-{id:4,sid:1,title:"Aide en mathématiques",cat:'soc',type:4,desc:"Aide à deux camarades avant le devoir.",date:'2026-11-18',st:'edit',pts:0,reason:"أضف عدد الحصص والتاريخ الدقيق.",grp:0},
-{id:5,sid:2,title:"Collecte de livres",cat:'soc',type:5,desc:"Collecte de 30 livres.",date:'2026-11-10',st:'ok',pts:25,grp:1},
-{id:6,sid:3,title:"حملة توعية حول الماء",cat:'cul',type:7,desc:"ملصقات توعوية بالمعهد.",date:'2026-11-19',st:'pending',pts:0,grp:1},
-{id:7,sid:3,title:"Peinture du mur",cat:'civ',type:8,desc:"Repeindre le mur avec des produits.",date:'2026-11-15',st:'no',pts:0,reason:"أشغال تتطلب مختصين بالغين، لا يُطلب من التلاميذ القيام بها.",grp:0}],
-rewards:[{id:1,n:["كتاب مدرسي مساعد","Livre parascolaire"],cost:60,pr:"مكتبة الأمل",st:10},{id:2,n:["حقيبة أدوات مدرسية","Pack fournitures"],cost:80,pr:"Papeterie Zaghouan",st:6},
-{id:3,n:["قسيمة شراء 10 د","Bon d'achat 10 DT"],cost:100,pr:"Librairie El Fahs",st:5},{id:4,n:["رحلة تربوية","Sortie éducative"],cost:150,pr:"نادي البيئة",st:20},{id:5,n:["شهادة تقدير","Certificat de mérite"],cost:50,pr:"BASMA",st:99}],
-reds:[],log:[],reps:[],acts:[{id:1,t:["حملة تشجير شاملة للمعهد","Grande journée de plantation"],st:'pending'}],pw:{}};
-let S={u:null,scr:'splash',tab:'home',f:'all',sel:null,edit:null,msg:''};
-const me=()=>S.u,sch=id=>D.schools.find(s=>s.id==id),usr=id=>D.users.find(u=>u.id==id);
+const usr=id=>D.users.find(u=>u.id==id),val=id=>($(id)||{}).value||'';
 const earned=id=>D.inits.filter(i=>i.sid==id&&i.st=='ok').reduce((a,i)=>a+i.pts,0);
-const spent=id=>D.reds.filter(r=>r.sid==id).reduce((a,r)=>a+r.cost,0);
-const bal=id=>earned(id)-spent(id);
-const toast=m=>{const e=document.getElementById('tt');e.innerHTML='<div class="toast" role="status">'+esc(m)+'</div>';setTimeout(()=>e.innerHTML='',2200)};
+const bal=id=>earned(id)-D.reds.filter(r=>r.sid==id).reduce((a,r)=>a+r.cost,0);
+function toast(m){$('tt').innerHTML='<div class="toast" role="status">'+esc(m)+'</div>';setTimeout(()=>$('tt').innerHTML='',2400)}
 function setL(l){L=l;document.documentElement.lang=l;document.documentElement.dir=l=='ar'?'rtl':'ltr';R()}
-const go=(tb,sel)=>{S.tab=tb;S.sel=sel||null;S.edit=null;R()};
-const stTag=s=>`<span class="tag ${s}">${t(s)}</span>`;
-const tiles=a=>`<div class="tiles">${a.map(x=>`<button class="tile ${x[3]||''}" onclick="${x[0]}"><span>${x[1]}</span><div>${x[2]}${x[4]?`<br><small>${x[4]}</small>`:''}</div></button>`).join('')}</div>`;
-const catN=c=>t(c);
-function topBar(){const n=S.u&&S.u.role=='sup'?D.inits.filter(i=>i.st=='pending'&&usr(i.sid).sch==S.u.sch).length:0;return`<div class="top"><div class="logo">BASMA<small>${L=='ar'?'بصمة':'Empreinte'}</small></div><div class="row">${n?`<button class="s" style="min-height:36px;padding:4px 12px" onclick="go('home')" aria-label="${t('notif')}">🔔 ${n}</button>`:''}<button class="s" style="min-height:36px;padding:4px 12px" onclick="setL('${L=='ar'?'fr':'ar'}')">${L=='ar'?'FR':'عربي'}</button></div></div>`}
-const NAV={student:[['home','🏠','home'],['mine','📋','mine'],['rew','🎁','rew'],['ach','🏅','ach'],['set','⚙️','set']],
-sup:[['home','📥','queue'],['hist','🗂️','hist'],['set','⚙️','set']],dir:[['home','📊','stats'],['team','👥','team'],['set','⚙️','set']],
-adm:[['home','📊','stats'],['orgs','🏫','orgs'],['rules','⭐','rules'],['users','👥','users'],['set','⚙️','set']]};
-function nav(){return`<nav><div>${NAV[me().role].map(n=>`<button class="${S.tab==n[0]?'on':''}" onclick="go('${n[0]}')"><span>${n[1]}</span>${t(n[2])}</button>`).join('')}</div></nav>`}
-function R(){const a=document.getElementById('app');
-if(S.scr=='splash'){a.innerHTML=`<div class="splash"><div class="mark" aria-hidden="true">👣</div><h1>BASMA | بصمة</h1><p>كل مبادرة تصنع أثراً</p><p>Chaque initiative laisse une empreinte</p><button class="w" style="margin-top:28px" onclick="S.scr='login';R()">${t('login')}</button></div>`;return}
-if(!S.u){a.innerHTML=topBar()+loginV();return}
-const v={student:stuV,sup:supV,dir:dirV,adm:admV}[S.u.role];
-a.innerHTML=topBar()+`<div class="pg">${S.tab=='set'?setV():v()}</div>`+nav()}
-function loginV(){const reg=S.reg;
-return`<div class="pg"><h2>${t(reg?'reg':'login')}</h2><div class="card">${reg?`<label>${t('name')}</label><input id="rn"><label>${t('school')}</label><select id="rs">${D.schools.map(s=>`<option value="${s.id}">${esc(nm(s))}</option>`).join('')}</select><label>${t('user')}</label><input id="ru"><label>${t('pw')}</label><input id="rp" type="password"><button onclick="doReg()">${t('reg')}</button>`:
+function go(x){S.tab=x;R()}
+const NAV={student:[['home','🏠'],['add','➕','add'],['mine','📋'],['rew','🎁'],['ach','🏅']],sup:[['home','📥','queue'],['hist','🗂️']],dir:[['home','📊','stats']],adm:[['home','📊','stats'],['rew','🎁']]};
+const nav=()=>'<nav><div>'+NAV[S.u.role].map(n=>`<button class="${S.tab==n[0]?'on':''}" onclick="go('${n[0]}')"><span>${n[1]}</span>${t(n[2]||n[0])}</button>`).join('')+'</div></nav>';
+const topBar=()=>`<div class="top"><div class="logo">BASMA<small>بصمة</small></div><div class="row"><button class="s" style="min-height:36px;padding:4px 12px" onclick="setL('${L=='ar'?'fr':'ar'}')">${L=='ar'?'FR':'عربي'}</button>${S.u?`<button class="s" style="min-height:36px;padding:4px 12px" onclick="S.u=null;S.tab='home';R()">${t('logout')}</button>`:''}</div></div>`;
+function R(){const a=$('app');if(!S.u){a.innerHTML=topBar()+login();return}
+const v={student:stu,sup:sup,dir:dir,adm:adm}[S.u.role];a.innerHTML=topBar()+'<div class="pg">'+v()+`<p style="margin-top:18px"><button class="s" onclick="rep()">⚑ ${t('report')}</button></p></div>`+nav()}
+function login(){return`<div class="lg"><div class="mark">👣</div><h1>بصمة | BASMA</h1><p class="gd">${t('slogan')}</p></div><div class="pg"><div class="card">${S.reg?
+`<label>${t('name')}</label><input id="rn" maxlength="60"><label>${t('school')}</label><select id="rs">${D.schools.map(s=>`<option value="${s.id}">${esc(nm(s))}</option>`).join('')}</select><label>${t('user')}</label><input id="ru" maxlength="30"><label>${t('pw')}</label><input id="rp" type="password"><button onclick="doReg()">${t('reg')}</button>`:
 `<label>${t('user')}</label><input id="lu" autocomplete="username"><label>${t('pw')}</label><input id="lp" type="password"><button onclick="doLogin()">${t('login')}</button>`}
-<p style="margin-top:10px"><button class="s" onclick="S.reg=!S.reg;R()">${t(reg?'login':'reg')}</button></p></div>
-<div class="card"><p class="mu">${t('demo')}</p><div class="row" style="margin-top:8px">${[['eleve','r_student'],['encadrant','r_sup'],['directeur','r_dir'],['admin','r_adm']].map(x=>`<button class="s" onclick="demo('${x[0]}')">${t(x[1])}</button>`).join('')}</div></div><p class="mu">${t('proto')}</p></div>`}
-function ntf(){const n=D.inits.filter(i=>i.st=='pending'&&S.u.role=='sup'&&usr(i.sid).sch==S.u.sch).length;if(n)toast('🔔 '+t('newb')+' ('+n+')')}
-function demo(u){S.u=usr(D.users.find(x=>x.u==u).id);S.tab='home';R();ntf()}
-function doLogin(){const u=D.users.find(x=>x.u==lu.value.trim());if(!u||(D.pw[u.u]||'1234')!=lp.value){toast(t('bad'));return}S.u=u;S.tab='home';R();ntf()}
-function doReg(){if(!rn.value.trim()||!ru.value.trim()||!rp.value||D.users.some(x=>x.u==ru.value.trim())){toast(t('fill'));return}
-const id=D.users.length+1;D.users.push({id,u:ru.value.trim(),name:rn.value.trim(),role:'student',sch:+rs.value});D.pw[ru.value.trim()]=rp.value;S.reg=false;R();toast(t('regok'))}
-function logout(){S.u=null;S.tab='home';S.scr='login';R()}
-function initCard(i,sup){const ty=D.types.find(x=>x.id==i.type);return`<div class="card" ${sup?`onclick="go('home',${i.id})" style="cursor:pointer"`:''}>${i.img?`<img src="${i.img}" alt="" style="width:100%;max-height:220px;object-fit:cover;border-radius:10px;margin-bottom:8px">`:''}<div class="row sp"><h3>${esc(i.title)}</h3>${stTag(i.st)}</div><p class="mu">${catN(i.cat)} • ${esc(i.date)}${i.grp?' • 👥':''}${sup?' • '+t('anon'):''}</p>${i.st=='ok'?`<p class="gd">+${i.pts} ${t('pts')}</p>`:''}${i.reason?`<p style="color:var(--rd)">${t('reason')}: ${esc(i.reason)}</p>`:''}</div>`}
-function stuV(){const u=me(),mi=D.inits.filter(i=>i.sid==u.id),ok=mi.filter(i=>i.st=='ok');
-if(S.tab=='home'){return`<h2>${t('hi')} ${esc(u.name.split(' ')[0])} 👋</h2><div class="card hero"><span>${t('solde')}</span><b>${bal(u.id)} <span class="gold" style="font-size:18px">${t('pts')}</span></b><p>${ok.length} ${t('apprd')}</p></div>${tiles([["go('add')",'📷',t('add'),'pri'],["go('mine')",'📋',t('mine'),'',mi.filter(i=>i.st=='pending').length+' '+t('pending')],["go('rew')",'🎁',t('rew')],["go('ach')",'🏅',t('ach')],["go('set')",'⚙️',t('set')]])}
-<h2>${t('last')}</h2>${ok.slice(-3).reverse().map(i=>initCard(i)).join('')||`<p class="mu">${t('none')}</p>`}<h2>${t('sugg')}</h2>${D.rewards.slice(0,2).map(rewCard).join('')}`}
-if(S.tab=='add')return addV();
-if(S.tab=='mine'){const l=mi.filter(i=>S.f=='all'||i.st==S.f);return`<h2>${t('mine')}</h2><div class="row chips">${['all','pending','ok','edit','no'].map(f=>`<button class="${S.f==f?'on':''}" onclick="S.f='${f}';R()">${t(f)}</button>`).join('')}</div>${l.map(i=>initCard(i)+(i.st=='edit'?`<button class="s" onclick="S.tab='add';S.edit=${i.id};R()">${t('resub')}</button>`:'')).join('')||`<p class="mu">${t('none')}</p>`}`}
-if(S.tab=='rew')return`<h2>${t('rew')}</h2><div class="card hero"><b>${bal(u.id)} ${t('pts')}</b></div><p class="mu">${t('optional')}</p>${D.rewards.map(rewCard).join('')}<h2>${t('rlog')}</h2>${D.reds.filter(r=>r.sid==u.id).map(r=>`<div class="card row sp"><span>${esc(r.n)}</span><span class="mu">-${r.cost}</span></div>`).join('')||`<p class="mu">${t('none')}</p>`}`;
-if(S.tab=='ach'){const lv=Math.floor(earned(u.id)/100)+1,pr=earned(u.id)%100,bd=[[ok.length>=1,'🌱','b1'],[ok.lengt
+<p style="margin-top:10px"><button class="s" onclick="S.reg=!S.reg;R()">${t(S.reg?'login':'reg')}</button></p></div>
+<div class="card"><p class="mu">${t('demo')}</p><div class="row" style="margin-top:8px">${[['eleve','student'],['encadrant','sup'],['directeur','dir'],['admin','adm']].map(x=>`<button class="s" onclick="demo('${x[0]}')">${t(x[1])}</button>`).join('')}</div></div><p class="mu">${t('proto')}</p></div>`}
+function demo(u){S.u=D.users.find(x=>x.u==u);S.tab='home';R()}
+function doLogin(){const u=D.users.find(x=>x.u==val('lu').trim());if(!u||u.pw!=val('lp')){toast(t('bad'));return}S.u=u;S.tab='home';R()}
+function doReg(){const u=val('ru').trim(),n=val('rn').trim();if(n.length<2||u.length<3||val('rp').length<4||D.users.some(x=>x.u==u)){toast(t('fill'));return}
+D.users.push({id:D.nid++,u,name:n,role:'student',sch:+val('rs'),pw:val('rp')});save();S.reg=0;R();toast('✓')}
+function rep(){const m=prompt(t('repq'));if(m&&m.trim()){D.reps.push({by:S.u.u,m:m.trim().slice(0,500)});save();toast(t('repok'))}}
+const tag=s=>`<span class="tag ${s}">${t(s)}</span>`;
+const card=(i,x)=>`<div class="card"><div class="row sp"><h3>${esc(i.title)}</h3>${tag(i.st)}</div><p class="mu">${t(i.cat)} • ${esc(i.date)}</p>${i.desc?`<p>${esc(i.desc)}</p>`:''}${i.st=='ok'?`<p class="gd">+${i.pts} ${t('pts')}</p>`:''}${i.reason?`<p style="color:var(--rd)">${t('reason')}: ${esc(i.reason)}</p>`:''}${x||''}</div>`;
+function stu(){const u=S.u,mi=D.inits.filter(i=>i.sid==u.id),ok=mi.filter(i=>i.st=='ok');
+if(S.tab=='home')return`<h2>${t('hi')} ${esc(u.name.split(' ')[0])}</h2><div class="card hero"><span>${t('bal')}</span><b>${bal(u.id)} <i>${t('pts')}</i></b><p>${ok.length} ${t('ok')}</p></div><button style="width:100%" onclick="go('add')">➕ ${t('add')}</button>`+(mi.slice(-3).reverse().map(i=>card(i)).join('')||`<p class="mu" style="margin-top:12px">${t('hold')}</p>`);
+if(S.tab=='add')return`<h2>${t('add')}</h2><div class="card"><label>${t('title')}</label><input id="at" maxlength="120"><label>${t('cat')}</label><select id="ac">${['env','soc','cul','civ'].map(c=>`<option value="${c}">${t(c)}</option>`).join('')}</select><label>${t('desc')}</label><textarea id="ad" rows="3" maxlength="1000"></textarea><label>${t('date')}</label><input id="ada" type="date" value="${new Date().toISOString().slice(0,10)}"><p class="mu">${t('note')}</p><button onclick="addI()">${t('send')}</button></div>`;
+if(S.tab=='mine')return`<h2>${t('mine')}</h2>`+(mi.slice().reverse().map(i=>card(i)).join('')||`<p class="mu">${t('hold')}</p>`);
+if(S.tab=='rew')return`<h2>${t('rew')}</h2><div class="card hero"><b>${bal(u.id)} <i>${t('pts')}</i></b></div>`+D.rewards.map(r=>`<div class="card row sp"><div><h3>${esc(nm(r))}</h3><span class="mu">${t('cost')}: ${r.cost}</span></div><button ${bal(u.id)<r.cost||r.st<1?'disabled':''} onclick="redeem(${r.id})">${t('redeem')}</button></div>`).join('');
+const n=ok.length,e=earned(u.id),en=ok.filter(i=>i.cat=='env').length,b=[[n>=1,'🌱','b1'],[n>=3,'⭐','b2'],[e>=100,'🏆','b3'],[en>=2,'🌳','b4']];
+return`<h2>${t('ach')}</h2><div class="badges">${b.map(x=>`<div class="card bd ${x[0]?'on':''}"><span>${x[1]}</span>${t(x[2])}</div>`).join('')}</div>`}
+function addI(){const ti=val('at').trim();if(ti.length<3){toast(t('fill'));return}
+if(D.inits.some(i=>i.sid==S.u.id&&i.title==ti&&i.date==val('ada'))){toast(t('dup'));return}
+D.inits.push({id:D.nid++,sid:S.u.id,title:ti,cat:val('ac'),desc:val('ad').trim(),date:val('ada'),st:'pending',pts:0});save();S.tab='mine';R();toast(t('sent'))}
+function redeem(id){const r=D.rewards.find(x=>x.id==id);if(!r||r.st<1||bal(S.u.id)<r.cost){toast(t('lack'));return}
+r.st--;D.reds.push({sid:S.u.id,rid:id,cost:r.cost});save();R();toast(t('done'))}
+function sup(){const mine=D.inits.filter(i=>usr(i.sid)&&usr(i.sid).sch==S.u.sch);
+if(S.tab=='hist')return`<h2>${t('hist')}</h2>`+(mine.filter(i=>i.st!='pending').map(i=>card(i)).join('')||`<p class="mu">${t('empty')}</p>`);
+const q=mine.filter(i=>i.st=='pending');return`<h2>${t('queue')}</h2>`+(q.map(i=>card(i,`<label>${t('giv')} (1-100)</label><input id="p${i.id}" type="number" min="1" max="100" value="20"><label>${t('rsn')}</label><input id="r${i.id}" maxlength="300"><div class="row"><button onclick="rev(${i.id},1)">${t('approve')}</button><button class="d" onclick="rev(${i.id},0)">${t('reject')}</button></div>`)).join('')||`<p class="mu">${t('nsup')}</p>`)}
+function rev(id,ok){const i=D.inits.find(x=>x.id==id);if(!i||i.st!='pending'||usr(i.sid).sch!=S.u.sch||S.u.role!='sup')return;
+if(ok){const p=Math.round(+val('p'+id));if(!(p>=1&&p<=100)){toast(t('fill'));return}i.st='ok';i.pts=p}
+else{const r=val('r'+id).trim();if(!r){toast(t('rsn'));return}i.st='no';i.reason=r}i.by=S.u.u;save();R()}
+const stats=sc=>{const ii=D.inits.filter(i=>sc==null||usr(i.sid)&&usr(i.sid).sch==sc),n=ii.length||1;
+return`<div class="row"><div class="card" style="flex:1"><div class="num">${new Set(ii.map(i=>i.sid)).size}</div>${t('sub')}</div><div class="card" style="flex:1"><div class="num">${ii.length}</div>${t('snt')}</div><div class="card" style="flex:1"><div class="num">${ii.filter(i=>i.st=='ok').length}</div>${t('apr')}</div></div>`+['env','soc','cul','civ'].map(c=>{const k=ii.filter(i=>i.cat==c).length;return`<div class="row sp"><span>${t(c)}</span><b>${k}</b></div><div class="bar"><i style="width:${Math.round(k/n*100)}%"></i></div>`}).join('')};
+const dir=()=>`<h2>${t('stats')}</h2>`+stats(S.u.sch);
+function adm(){if(S.tab=='rew')return`<h2>${t('newrew')}</h2><div class="card"><label>${t('rname')}</label><input id="nn" maxlength="60"><label>${t('rcost')}</label><input id="nc" type="number" min="1" max="1000"><button onclick="addR()">${t('newrew')}</button></div>`+D.rewards.map(r=>`<div class="card row sp"><span>${esc(nm(r))}</span><b>${r.cost}</b></div>`).join('');
+return`<h2>${t('stats')}</h2>`+stats(null)+`<h2>${t('reps')}</h2>`+(D.reps.map(r=>`<div class="card"><p>${esc(r.m)}</p><p class="mu">${esc(r.by)}</p></div>`).join('')||`<p class="mu">${t('empty')}</p>`)}
+function addR(){const n=val('nn').trim(),c=Math.round(+val('nc'));if(!n||!(c>=1)||S.u.role!='adm'){toast(t('fill'));return}D.rewards.push({id:D.nid++,n:[n,n],cost:c,st:50});save();R()}
+R();
+</script></body></html>
