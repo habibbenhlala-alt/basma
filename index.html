@@ -22,6 +22,9 @@ nav div{display:flex;max-width:560px;margin:auto}nav button{flex:1;background:no
 .toast{position:fixed;bottom:90px;left:50%;transform:translateX(-50%);background:var(--tx);color:#fff;padding:10px 18px;border-radius:24px;z-index:20}
 .badges{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.bd{text-align:center;opacity:.35}.bd.on{opacity:1}.bd span{display:block;font-size:34px}
 .lg{text-align:center;padding:26px 10px}.lg .mark{font-size:54px}.lg h1{color:var(--g);font-size:34px}
+.ph{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:6px;margin:-14px -14px 10px;border-radius:14px 14px 0 0}.ph img{flex:0 0 100%;width:100%;max-height:340px;object-fit:cover;scroll-snap-align:center}
+.rx{display:flex;gap:6px;flex-wrap:wrap}.rx button{background:var(--gl);color:var(--tx);min-height:38px;padding:4px 12px}.rx button.on{background:var(--g);color:#fff}
+.pv{display:flex;gap:6px}.pv img{width:64px;height:64px;object-fit:cover;border-radius:8px}.ck{display:flex;gap:8px;align-items:flex-start;margin:8px 0}.ck input{width:22px;min-height:22px;margin:2px 0}
 </style></head><body><div id="app"></div><div id="tt"></div>
 <script>
 const K={slogan:["كل مبادرة تصنع أثراً","Chaque initiative laisse une empreinte"],login:["دخول","Connexion"],reg:["إنشاء حساب","Créer un compte"],user:["المعرّف","Identifiant"],pw:["كلمة المرور","Mot de passe"],
@@ -37,13 +40,16 @@ logout:["خروج","Quitter"],report:["إبلاغ عن مشكل","Signaler un pr
 proto:["نموذج تجريبي: البيانات تُحفظ في هذا الجهاز فقط، وليست آمنة للاستعمال الحقيقي بعد.","Prototype : données stockées sur cet appareil uniquement, non sécurisées pour un usage réel."],
 newrew:["إضافة مكافأة","Ajouter une récompense"],rname:["اسم المكافأة","Nom"],rcost:["الكلفة بالنقاط","Coût en points"],sub:["المشاركون","Participants"],snt:["المبادرات المرسلة","Envoyées"],apr:["المعتمدة","Validées"],
 b1:["أول بصمة","Première empreinte"],b2:["3 مبادرات","3 initiatives"],b3:["100 نقطة","100 points"],b4:["حارس البيئة","Gardien de l'environnement"],hold:["لا توجد مبادرات بعد، أضف أول بصمة لك.","Aucune initiative : ajoutez votre première empreinte."],
-all:["الكل","Tous"],nsup:["لا طلبات تنتظر المراجعة.","Aucune demande en attente."]};
+all:["الكل","Tous"],feed:["الواجهة","Fil"],photos:["صور (حتى 3، اختياري)","Photos (3 max, facultatif)"],
+consent:["أؤكد أن الصور بلا وجوه تلاميذ وأن النشر بموافقة الإدارة وولي الأمر","Je confirme : aucun visage d'élève et publication avec l'accord de l'administration et du parent"],
+needck:["أكّد الموافقة لإرسال الصور","Confirmez l'accord pour envoyer les photos"],pub:["نشر في واجهة المؤسسة","Publier dans le fil de l'établissement"],hide:["إخفاء","Masquer"],
+nofeed:["لا منشورات بعد","Aucune publication"],anon:["تلميذ من المؤسسة","Élève de l'établissement"],rxnote:["التفاعلات لا تمنح نقاطاً، النقاط من المشرف فقط.","Les réactions ne donnent pas de points ; seuls les encadrants en donnent."],ph_err:["تعذر قراءة الصورة","Image illisible"],full:["ذاكرة الجهاز ممتلئة","Mémoire pleine"],nsup:["لا طلبات تنتظر المراجعة.","Aucune demande en attente."]};
 let L='ar',S={u:null,tab:'home',reg:0};const KEY='basma_v1';
 const seed=()=>({schools:[{id:1,n:["المعهد الثانوي بزغوان","Lycée de Zaghouan"]},{id:2,n:["المعهد الثانوي بالفحص","Lycée d'El Fahs"]}],
 users:[{id:1,u:'eleve',name:'Yasmine Ben Salah',role:'student',sch:1,pw:'1234'},{id:2,u:'encadrant',name:'Mme Hela Mansouri',role:'sup',sch:1,pw:'1234'},{id:3,u:'directeur',name:'M. Karim Gharbi',role:'dir',sch:1,pw:'1234'},{id:4,u:'admin',name:'Admin BASMA',role:'adm',sch:0,pw:'1234'}],
 inits:[],reds:[],reps:[],nid:10,rewards:[{id:1,n:["شهادة تقدير","Certificat de mérite"],cost:50,st:99},{id:2,n:["حقيبة أدوات مدرسية","Pack fournitures"],cost:80,st:6},{id:3,n:["رحلة تربوية","Sortie éducative"],cost:150,st:20}]});
 let D=null;try{D=JSON.parse(localStorage.getItem(KEY))}catch(e){}if(!D||!D.users)D=seed();
-const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(D))}catch(e){}};
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(D))}catch(e){toast(L=='ar'?'ذاكرة الجهاز ممتلئة':'Mémoire pleine')}};
 const $=id=>document.getElementById(id),t=k=>{const v=K[k];return v?v[L=='ar'?0:1]:k},nm=o=>o.n[L=='ar'?0:1];
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const usr=id=>D.users.find(u=>u.id==id),val=id=>($(id)||{}).value||'';
@@ -52,7 +58,7 @@ const bal=id=>earned(id)-D.reds.filter(r=>r.sid==id).reduce((a,r)=>a+r.cost,0);
 function toast(m){$('tt').innerHTML='<div class="toast" role="status">'+esc(m)+'</div>';setTimeout(()=>$('tt').innerHTML='',2400)}
 function setL(l){L=l;document.documentElement.lang=l;document.documentElement.dir=l=='ar'?'rtl':'ltr';R()}
 function go(x){S.tab=x;R()}
-const NAV={student:[['home','🏠'],['add','➕','add'],['mine','📋'],['rew','🎁'],['ach','🏅']],sup:[['home','📥','queue'],['hist','🗂️']],dir:[['home','📊','stats']],adm:[['home','📊','stats'],['rew','🎁']]};
+const NAV={student:[['home','🏠'],['feed','📸'],['add','➕','add'],['mine','📋'],['rew','🎁']],sup:[['home','📥','queue'],['feed','📸'],['hist','🗂️']],dir:[['home','📊','stats'],['feed','📸']],adm:[['home','📊','stats'],['rew','🎁']]};
 const nav=()=>'<nav><div>'+NAV[S.u.role].map(n=>`<button class="${S.tab==n[0]?'on':''}" onclick="go('${n[0]}')"><span>${n[1]}</span>${t(n[2]||n[0])}</button>`).join('')+'</div></nav>';
 const topBar=()=>`<div class="top"><div class="logo">BASMA<small>بصمة</small></div><div class="row"><button class="s" style="min-height:36px;padding:4px 12px" onclick="setL('${L=='ar'?'fr':'ar'}')">${L=='ar'?'FR':'عربي'}</button>${S.u?`<button class="s" style="min-height:36px;padding:4px 12px" onclick="S.u=null;S.tab='home';R()">${t('logout')}</button>`:''}</div></div>`;
 function R(){const a=$('app');if(!S.u){a.innerHTML=topBar()+login();return}
@@ -68,30 +74,41 @@ function doReg(){const u=val('ru').trim(),n=val('rn').trim();if(n.length<2||u.le
 D.users.push({id:D.nid++,u,name:n,role:'student',sch:+val('rs'),pw:val('rp')});save();S.reg=0;R();toast('✓')}
 function rep(){const m=prompt(t('repq'));if(m&&m.trim()){D.reps.push({by:S.u.u,m:m.trim().slice(0,500)});save();toast(t('repok'))}}
 const tag=s=>`<span class="tag ${s}">${t(s)}</span>`;
-const card=(i,x)=>`<div class="card"><div class="row sp"><h3>${esc(i.title)}</h3>${tag(i.st)}</div><p class="mu">${t(i.cat)} • ${esc(i.date)}</p>${i.desc?`<p>${esc(i.desc)}</p>`:''}${i.st=='ok'?`<p class="gd">+${i.pts} ${t('pts')}</p>`:''}${i.reason?`<p style="color:var(--rd)">${t('reason')}: ${esc(i.reason)}</p>`:''}${x||''}</div>`;
+const gal=i=>i.imgs&&i.imgs.length?'<div class="ph">'+i.imgs.map(s=>`<img src="${esc(s)}" alt="">`).join('')+'</div>':'';
+const card=(i,x)=>`<div class="card">${gal(i)}<div class="row sp"><h3>${esc(i.title)}</h3>${tag(i.st)}</div><p class="mu">${t(i.cat)} • ${esc(i.date)}</p>${i.desc?`<p>${esc(i.desc)}</p>`:''}${i.st=='ok'?`<p class="gd">+${i.pts} ${t('pts')}</p>`:''}${i.reason?`<p style="color:var(--rd)">${t('reason')}: ${esc(i.reason)}</p>`:''}${x||''}</div>`;
 function stu(){const u=S.u,mi=D.inits.filter(i=>i.sid==u.id),ok=mi.filter(i=>i.st=='ok');
-if(S.tab=='home')return`<h2>${t('hi')} ${esc(u.name.split(' ')[0])}</h2><div class="card hero"><span>${t('bal')}</span><b>${bal(u.id)} <i>${t('pts')}</i></b><p>${ok.length} ${t('ok')}</p></div><button style="width:100%" onclick="go('add')">➕ ${t('add')}</button>`+(mi.slice(-3).reverse().map(i=>card(i)).join('')||`<p class="mu" style="margin-top:12px">${t('hold')}</p>`);
-if(S.tab=='add')return`<h2>${t('add')}</h2><div class="card"><label>${t('title')}</label><input id="at" maxlength="120"><label>${t('cat')}</label><select id="ac">${['env','soc','cul','civ'].map(c=>`<option value="${c}">${t(c)}</option>`).join('')}</select><label>${t('desc')}</label><textarea id="ad" rows="3" maxlength="1000"></textarea><label>${t('date')}</label><input id="ada" type="date" value="${new Date().toISOString().slice(0,10)}"><p class="mu">${t('note')}</p><button onclick="addI()">${t('send')}</button></div>`;
+if(S.tab=='feed')return feed();
+if(S.tab=='home')return`<h2>${t('hi')} ${esc(u.name.split(' ')[0])}</h2><div class="card hero"><span>${t('bal')}</span><b>${bal(u.id)} <i>${t('pts')}</i></b><p>${ok.length} ${t('ok')}</p></div><button style="width:100%" onclick="go('add')">➕ ${t('add')}</button><button class="s" style="width:100%;margin-top:8px" onclick="go('ach')">🏅 ${t('ach')}</button>`+(mi.slice(-3).reverse().map(i=>card(i)).join('')||`<p class="mu" style="margin-top:12px">${t('hold')}</p>`);
+if(S.tab=='add')return`<h2>${t('add')}</h2><div class="card"><label>${t('title')}</label><input id="at" maxlength="120"><label>${t('cat')}</label><select id="ac">${['env','soc','cul','civ'].map(c=>`<option value="${c}">${t(c)}</option>`).join('')}</select><label>${t('desc')}</label><textarea id="ad" rows="3" maxlength="1000"></textarea><label>${t('date')}</label><input id="ada" type="date" value="${new Date().toISOString().slice(0,10)}"><label>${t('photos')}</label><input id="af" type="file" accept="image/*" multiple onchange="pick(this)"><div id="pv" class="pv"></div><label class="ck" id="ckw" style="display:none"><input id="ack" type="checkbox"><span>${t('consent')}</span></label><p class="mu">${t('note')}</p><button onclick="addI()">${t('send')}</button></div>`;
 if(S.tab=='mine')return`<h2>${t('mine')}</h2>`+(mi.slice().reverse().map(i=>card(i)).join('')||`<p class="mu">${t('hold')}</p>`);
 if(S.tab=='rew')return`<h2>${t('rew')}</h2><div class="card hero"><b>${bal(u.id)} <i>${t('pts')}</i></b></div>`+D.rewards.map(r=>`<div class="card row sp"><div><h3>${esc(nm(r))}</h3><span class="mu">${t('cost')}: ${r.cost}</span></div><button ${bal(u.id)<r.cost||r.st<1?'disabled':''} onclick="redeem(${r.id})">${t('redeem')}</button></div>`).join('');
 const n=ok.length,e=earned(u.id),en=ok.filter(i=>i.cat=='env').length,b=[[n>=1,'🌱','b1'],[n>=3,'⭐','b2'],[e>=100,'🏆','b3'],[en>=2,'🌳','b4']];
 return`<h2>${t('ach')}</h2><div class="badges">${b.map(x=>`<div class="card bd ${x[0]?'on':''}"><span>${x[1]}</span>${t(x[2])}</div>`).join('')}</div>`}
 function addI(){const ti=val('at').trim();if(ti.length<3){toast(t('fill'));return}
 if(D.inits.some(i=>i.sid==S.u.id&&i.title==ti&&i.date==val('ada'))){toast(t('dup'));return}
-D.inits.push({id:D.nid++,sid:S.u.id,title:ti,cat:val('ac'),desc:val('ad').trim(),date:val('ada'),st:'pending',pts:0});save();S.tab='mine';R();toast(t('sent'))}
+if(PH.length&&!($('ack')||{}).checked){toast(t('needck'));return}
+D.inits.push({id:D.nid++,sid:S.u.id,title:ti,cat:val('ac'),desc:val('ad').trim(),date:val('ada'),st:'pending',pts:0,imgs:PH.slice(0,3)});PH=[];save();S.tab='mine';R();toast(t('sent'))}
 function redeem(id){const r=D.rewards.find(x=>x.id==id);if(!r||r.st<1||bal(S.u.id)<r.cost){toast(t('lack'));return}
 r.st--;D.reds.push({sid:S.u.id,rid:id,cost:r.cost});save();R();toast(t('done'))}
-function sup(){const mine=D.inits.filter(i=>usr(i.sid)&&usr(i.sid).sch==S.u.sch);
+function sup(){const mine=D.inits.filter(i=>usr(i.sid)&&usr(i.sid).sch==S.u.sch);if(S.tab=='feed')return feed();
 if(S.tab=='hist')return`<h2>${t('hist')}</h2>`+(mine.filter(i=>i.st!='pending').map(i=>card(i)).join('')||`<p class="mu">${t('empty')}</p>`);
-const q=mine.filter(i=>i.st=='pending');return`<h2>${t('queue')}</h2>`+(q.map(i=>card(i,`<label>${t('giv')} (1-100)</label><input id="p${i.id}" type="number" min="1" max="100" value="20"><label>${t('rsn')}</label><input id="r${i.id}" maxlength="300"><div class="row"><button onclick="rev(${i.id},1)">${t('approve')}</button><button class="d" onclick="rev(${i.id},0)">${t('reject')}</button></div>`)).join('')||`<p class="mu">${t('nsup')}</p>`)}
+const q=mine.filter(i=>i.st=='pending');return`<h2>${t('queue')}</h2>`+(q.map(i=>card(i,`<label>${t('giv')} (1-100)</label><input id="p${i.id}" type="number" min="1" max="100" value="20"><label>${t('rsn')}</label><input id="r${i.id}" maxlength="300">${i.imgs&&i.imgs.length?`<label class="ck"><input id="u${i.id}" type="checkbox" checked><span>${t('pub')}</span></label>`:''}<div class="row"><button onclick="rev(${i.id},1)">${t('approve')}</button><button class="d" onclick="rev(${i.id},0)">${t('reject')}</button></div>`)).join('')||`<p class="mu">${t('nsup')}</p>`)}
 function rev(id,ok){const i=D.inits.find(x=>x.id==id);if(!i||i.st!='pending'||usr(i.sid).sch!=S.u.sch||S.u.role!='sup')return;
-if(ok){const p=Math.round(+val('p'+id));if(!(p>=1&&p<=100)){toast(t('fill'));return}i.st='ok';i.pts=p}
+if(ok){const p=Math.round(+val('p'+id));if(!(p>=1&&p<=100)){toast(t('fill'));return}i.st='ok';i.pts=p;i.pub=!!(i.imgs&&i.imgs.length&&($('u'+id)||{}).checked)}
 else{const r=val('r'+id).trim();if(!r){toast(t('rsn'));return}i.st='no';i.reason=r}i.by=S.u.u;save();R()}
 const stats=sc=>{const ii=D.inits.filter(i=>sc==null||usr(i.sid)&&usr(i.sid).sch==sc),n=ii.length||1;
 return`<div class="row"><div class="card" style="flex:1"><div class="num">${new Set(ii.map(i=>i.sid)).size}</div>${t('sub')}</div><div class="card" style="flex:1"><div class="num">${ii.length}</div>${t('snt')}</div><div class="card" style="flex:1"><div class="num">${ii.filter(i=>i.st=='ok').length}</div>${t('apr')}</div></div>`+['env','soc','cul','civ'].map(c=>{const k=ii.filter(i=>i.cat==c).length;return`<div class="row sp"><span>${t(c)}</span><b>${k}</b></div><div class="bar"><i style="width:${Math.round(k/n*100)}%"></i></div>`}).join('')};
-const dir=()=>`<h2>${t('stats')}</h2>`+stats(S.u.sch);
+const dir=()=>S.tab=='feed'?feed():`<h2>${t('stats')}</h2>`+stats(S.u.sch);
 function adm(){if(S.tab=='rew')return`<h2>${t('newrew')}</h2><div class="card"><label>${t('rname')}</label><input id="nn" maxlength="60"><label>${t('rcost')}</label><input id="nc" type="number" min="1" max="1000"><button onclick="addR()">${t('newrew')}</button></div>`+D.rewards.map(r=>`<div class="card row sp"><span>${esc(nm(r))}</span><b>${r.cost}</b></div>`).join('');
 return`<h2>${t('stats')}</h2>`+stats(null)+`<h2>${t('reps')}</h2>`+(D.reps.map(r=>`<div class="card"><p>${esc(r.m)}</p><p class="mu">${esc(r.by)}</p></div>`).join('')||`<p class="mu">${t('empty')}</p>`)}
 function addR(){const n=val('nn').trim(),c=Math.round(+val('nc'));if(!n||!(c>=1)||S.u.role!='adm'){toast(t('fill'));return}D.rewards.push({id:D.nid++,n:[n,n],cost:c,st:50});save();R()}
+let PH=[];const RX=['❤️','😂','👏','🌱'];
+function pick(el){PH=[];const fs=[...el.files].slice(0,3);let n=0;if(!fs.length){$('pv').innerHTML='';$('ckw').style.display='none';return}
+fs.forEach(f=>{const r=new FileReader();r.onload=()=>{const im=new Image();im.onload=()=>{const k=Math.min(1,720/Math.max(im.width,im.height)),c=document.createElement('canvas');c.width=Math.round(im.width*k);c.height=Math.round(im.height*k);c.getContext('2d').drawImage(im,0,0,c.width,c.height);PH.push(c.toDataURL('image/jpeg',.6));
+if(++n==fs.length){$('pv').innerHTML=PH.map(s=>`<img src="${s}" alt="">`).join('');$('ckw').style.display='flex'}};im.onerror=()=>toast(t('ph_err'));im.src=r.result};r.readAsDataURL(f)})}
+function feed(){const u=S.u,staff=u.role=='sup'||u.role=='dir',ps=D.inits.filter(i=>i.pub&&i.st=='ok'&&usr(i.sid)&&usr(i.sid).sch==u.sch).reverse();
+return`<h2>${t('feed')}</h2><p class="mu">${t('rxnote')}</p>`+(ps.map(i=>{const rx=i.rx||{};return`<div class="card">${gal(i)}<h3>${esc(i.title)}</h3><p class="mu">${t(i.cat)} • ${t('anon')}</p>${i.desc?`<p>${esc(i.desc)}</p>`:''}<div class="rx">${RX.map(e=>{const n=Object.values(rx).filter(v=>v==e).length;return`<button class="${rx[u.id]==e?'on':''}" onclick="react(${i.id},'${e}')">${e} ${n||''}</button>`}).join('')}</div>${staff?`<p style="margin-top:8px"><button class="s" onclick="hide(${i.id})">${t('hide')}</button></p>`:''}</div>`}).join('')||`<p class="mu">${t('nofeed')}</p>`)}
+function react(id,e){const i=D.inits.find(x=>x.id==id),u=S.u;if(!i||!i.pub||i.st!='ok'||usr(i.sid).sch!=u.sch||!RX.includes(e))return;i.rx=i.rx||{};if(i.rx[u.id]==e)delete i.rx[u.id];else i.rx[u.id]=e;save();R()}
+function hide(id){const i=D.inits.find(x=>x.id==id);if(!i||!(S.u.role=='sup'||S.u.role=='dir')||usr(i.sid).sch!=S.u.sch)return;i.pub=false;save();R()}
 R();
 </script></body></html>
