@@ -22,7 +22,8 @@ nav{position:fixed;bottom:0;left:0;right:0;background:var(--c);border-top:1px so
 .ph{display:flex;overflow-x:auto;gap:6px;margin:-14px -14px 10px;border-radius:14px 14px 0 0}.ph img{flex:0 0 100%;width:100%;max-height:300px;object-fit:cover}
 .rx{display:flex;gap:6px;flex-wrap:wrap}.rx button{background:var(--gl);color:var(--tx);min-height:38px;padding:4px 12px}.rx button.on{background:var(--g);color:var(--bt)}
 .pv{display:flex;gap:6px;flex-wrap:wrap}.pv img{width:64px;height:64px;object-fit:cover;border-radius:8px}.ck{display:flex;gap:8px;align-items:flex-start;margin:8px 0}.ck input{width:22px;min-height:22px;margin:2px 0}
-.cam{display:flex;flex-direction:column;align-items:center;gap:4px;padding:22px;border:2px dashed var(--g2);border-radius:14px;color:var(--g);cursor:pointer;margin-bottom:8px}.chips{margin:4px 0 10px}.chips button{background:var(--c);color:var(--mu);border:1px solid var(--bd);padding:6px 12px;min-height:36px;font-size:13px}.chips button.on{background:var(--g);color:var(--bt)}
+.cam{display:flex;flex-direction:column;align-items:center;gap:4px;padding:22px;border:2px dashed var(--g2);border-radius:14px;color:var(--g);cursor:pointer;margin-bottom:8px}.chips{margin:4px 0 10px}.chips button{background:var(--c);color:var(--mu);border:1px solid var(--bd);padding:6px 12px;min-height:36px;font-size:13px}
+.google{display:flex;align-items:center;justify-content:center;gap:12px;background:#fff;color:#263238;border:1px solid #dadce0;width:100%;font-weight:700}.google .gmark{font:bold 22px Arial;color:#4285f4}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
@@ -34,8 +35,8 @@ const SUPABASE_URL = "https://npzjkrmfjkojmfsloqmg.supabase.co";
 const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_0dtLP5J4zHWClBm9VwpQvA_n1H9I-GJ";
 const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
 
-const K={slogan:["كل مبادرة تصنع أثراً","Chaque initiative laisse une empreinte"],login:["دخول","Connexion"],reg:["إنشاء حساب","Créer un compte"],user:["المعرّف","Identifiant"],email:["البريد الإلكتروني","Adresse e-mail"],pw:["كلمة المرور","Mot de passe"],bad:["بيانات الدخول غير صحيحة","Identifiants incorrects"],student:["تلميذ","Élève"],sup:["مشرف","Encadrant"],dir:["مدير المؤسسة","Directeur"],adm:["مدير النظام","Admin"],name:["الاسم الكامل","Nom complet"],school:["المؤسسة","Établissement"],fill:["يرجى التثبت من الحقول (كلمة المرور 8 أحرف على الأقل)","Vérifiez les champs (mot de passe : 8 caractères min.)"],hi:["مرحباً","Bonjour"],bal:["رصيد بصمة","Solde BASMA"],pts:["نقطة","pts"],add:["أضف مبادرة","Ajouter une initiative"],mine:["مبادراتي","Mes initiatives"],rew:["المكافآت","Récompenses"],ach:["الإنجازات","Succès"],home:["الرئيسية","Accueil"],queue:["الطلبات","Demandes"],hist:["السجل","Historique"],stats:["الإحصائيات","Statistiques"],title:["عنوان المبادرة","Titre"],cat:["التصنيف","Catégorie"],desc:["وصف النشاط","Description"],send:["إرسال للمراجعة","Envoyer pour validation"],sent:["تم الإرسال للمراجعة","Envoyé pour validation"],dup:["تعذر إرسال المبادرة","Impossible d'envoyer l'initiative"],note:["النقاط يحددها المشرف بعد المصادقة فقط.","Les points sont fixés par l'encadrant après validation."],env:["بيئية","Environnement"],soc:["اجتماعية","Social"],cul:["تربوية وثقافية","Éducatif & culturel"],civ:["مواطنة","Citoyenneté"],pending:["قيد المراجعة","En attente"],ok:["مقبولة","Validée"],no:["مرفوضة","Refusée"],reason:["السبب","Motif"],cost:["الكلفة","Coût"],redeem:["استبدال","Échanger"],lack:["رصيدك لا يكفي","Solde insuffisant"],done:["تم الاستبدال","Échange effectué"],approve:["اعتماد","Valider"],reject:["رفض","Refuser"],giv:["النقاط","Points"],rsn:["سبب الرفض (إجباري)","Motif du refus (obligatoire)"],empty:["لا شيء حالياً","Rien pour l'instant"],logout:["خروج","Quitter"],report:["إبلاغ عن مشكل","Signaler un problème"],repq:["صف المشكل:","Décrivez le problème :"],repok:["وصل البلاغ","Signalement transmis"],reps:["البلاغات","Signalements"],sub:["المشاركون","Participants"],snt:["المبادرات المرسلة","Envoyées"],apr:["المعتمدة","Validées"],b1:["أول بصمة","Première empreinte"],b2:["3 مبادرات","3 initiatives"],b3:["100 نقطة","100 points"],b4:["حارس البيئة","Gardien de l'environnement"],hold:["لا توجد مبادرات بعد، أضف أول بصمة لك.","Aucune initiative : ajoutez votre première empreinte."],feed:["واجهة المؤسسة","Fil de l'établissement"],snap:["صوّر مبادرتك","Photographiez votre initiative"],gallery:["أو اختر من المعرض","ou choisir dans la galerie"],opt:["اختياري","facultatif"],needone:["أضف صورة أو عنواناً","Ajoutez une photo ou un titre"],photos:["صور (حتى 3، اختياري)","Photos (3 max, facultatif)"],consent:["أؤكد أن الصور بلا وجوه تلاميذ وأن النشر بموافقة الإدارة وولي الأمر","Je confirme : aucun visage d'élève et publication avec accord"],needck:["أكّد الموافقة لإرسال الصور","Confirmez l'accord pour envoyer les photos"],pub:["نشر في واجهة المؤسسة","Publier dans le fil"],hide:["إخفاء","Masquer"],nofeed:["لا منشورات بعد","Aucune publication"],anon:["تلميذ من المؤسسة","Élève de l'établissement"],rxnote:["التفاعلات لا تمنح نقاطاً، النقاط من المشرف فقط.","Les réactions ne donnent pas de points."],ph_err:["تعذر قراءة الصورة","Image illisible"],full:["حجم الصور كبير. اختر صوراً أصغر.","Images trop volumineuses."],nsup:["لا طلبات تنتظر المراجعة.","Aucune demande en attente."],invite:["رمز دعوة (للمشرف أو المدير)","Code d'invitation (encadrant/directeur)"],invok:["تم تفعيل الدعوة","Invitation activée"],invbad:["رمز الدعوة غير صالح أو منتهي","Code invalide ou expiré"],newrew:["إضافة مكافأة","Ajouter une récompense"],rname:["اسم المكافأة","Nom"],rcost:["الكلفة بالنقاط","Coût en points"],stock:["الكمية","Quantité"],wait:["جارٍ التحميل...","Chargement..."],confirmmail:["تحقق من بريدك الإلكتروني لتأكيد الحساب، ثم سجّل الدخول.","Vérifiez votre e-mail pour confirmer le compte, puis connectez-vous."],err:["حدث خطأ: ","Erreur : "],noinst:["لا توجد مؤسسة مسجلة في قاعدة البيانات.","Aucun établissement enregistré."]};
-let L='ar',S={user:null,profile:null,tab:'home',reg:false,initiatives:[],rewards:[],institutions:[],reactions:[],reports:[],balance:0},PH=[],CT='env',TH=localStorage.getItem('basma_theme')||'light';
+const K={slogan:["كل مبادرة تصنع أثراً","Chaque initiative laisse une empreinte"],login:["دخول","Connexion"],reg:["إنشاء حساب","Créer un compte"],user:["المعرّف","Identifiant"],email:["البريد الإلكتروني","Adresse e-mail"],pw:["كلمة المرور","Mot de passe"],bad:["بيانات الدخول غير صحيحة","Identifiants incorrects"],student:["تلميذ","Élève"],sup:["مشرف","Encadrant"],dir:["مدير المؤسسة","Directeur"],adm:["مدير النظام","Admin"],name:["الاسم الكامل","Nom complet"],school:["المؤسسة","Établissement"],fill:["يرجى التثبت من الحقول","Vérifiez les champs"],hi:["مرحباً","Bonjour"],bal:["رصيد بصمة","Solde BASMA"],pts:["نقطة","pts"],add:["أضف مبادرة","Ajouter une initiative"],mine:["مبادراتي","Mes initiatives"],rew:["المكافآت","Récompenses"],ach:["الإنجازات","Succès"],home:["الرئيسية","Accueil"],queue:["الطلبات","Demandes"],hist:["السجل","Historique"],stats:["الإحصائيات","Statistiques"],title:["عنوان المبادرة","Titre"],cat:["التصنيف","Catégorie"],desc:["وصف النشاط","Description"],send:["إرسال للمراجعة","Envoyer pour validation"],sent:["تم الإرسال للمراجعة","Envoyé pour validation"],dup:["تعذر إرسال المبادرة","Impossible d'envoyer l'initiative"],note:["النقاط يحددها المشرف بعد المصادقة فقط.","Les points sont fixés par l'encadrant après validation."],env:["بيئية","Environnement"],soc:["اجتماعية","Social"],cul:["تربوية وثقافية","Éducatif & culturel"],civ:["مواطنة","Citoyenneté"],pending:["قيد المراجعة","En attente"],ok:["مقبولة","Validée"],no:["مرفوضة","Refusée"],reason:["السبب","Motif"],cost:["الكلفة","Coût"],redeem:["استبدال","Échanger"],lack:["رصيدك لا يكفي","Solde insuffisant"],done:["تم الاستبدال","Échange effectué"],approve:["اعتماد","Valider"],reject:["رفض","Refuser"],giv:["النقاط","Points"],rsn:["سبب الرفض (إجباري)","Motif du refus (obligatoire)"],empty:["لا شيء حالياً","Rien pour l'instant"],logout:["خروج","Quitter"],report:["إبلاغ عن مشكل","Signaler un problème"],repq:["صف المشكل:","Décrivez le problème :"],repok:["وصل البلاغ","Signalement transmis"],reps:["البلاغات","Signalements"],sub:["المشاركون","Participants"],snt:["المبادرات المرسلة","Envoyées"],apr:["المعتمدة","Validées"],b1:["أول بصمة","Première empreinte"],b2:["3 مبادرات","3 initiatives"],b3:["100 نقطة","100 points"],b4:["حارس البيئة","Gardien del'environnement"],hold:["لا توجد مبادرات بعد، أضف أول بصمة لك.","Aucune initiative : ajoutez votre première empreinte."],feed:["واجهة المؤسسة","Fil de l'établissement"],snap:["صوّر مبادرتك","Photographiez votre initiative"],gallery:["أو اختر من المعرض","ou choisir dans la galerie"],opt:["اختياري","facultatif"],needone:["أضف صورة أو عنواناً","Ajoutez une photo ou un titre"],photos:["صور (حتى 3، اختياري)","Photos (3 max, facultatif)"],consent:["أؤكد أن الصور بلا وجوه تلاميذ وأن النشر بموافقة الإدارة وولي الأمر","Je confirme : aucun visage d'élève et publication avec accord"],needck:["أكّد الموافقة لإرسال الصور","Confirmez l'accord pour envoyer les photos"],pub:["نشر في واجهة المؤسسة","Publier dans le fil"],hide:["إخفاء","Masquer"],nofeed:["لا منشورات بعد","Aucune publication"],anon:["تلميذ من المؤسسة","Élève de l'établissement"],rxnote:["التفاعلات لا تمنح نقاطاً، النقاط من المشرف فقط.","Les réactions ne donnent pas de points."],ph_err:["تعذر قراءة الصورة","Image illisible"],full:["حجم الصور كبير. اختر صوراً أصغر.","Images trop volumineuses."],nsup:["لا طلبات تنتظر المراجعة.","Aucune demande en attente."],invite:["رمز دعوة (للمشرف أو المدير)","Code d'invitation (encadrant/directeur)"],invok:["تم تفعيل الدعوة","Invitation activée"],invbad:["رمز الدعوة غير صالح أو منتهي","Code invalide ou expiré"],newrew:["إضافة مكافأة","Ajouter une récompense"],rname:["اسم المكافأة","Nom"],rcost:["الكلفة بالنقاط","Coût en points"],stock:["الكمية","Quantité"],wait:["جارٍ التحميل...","Chargement..."],confirmmail:["تحقق من بريدك الإلكتروني لتأكيد الحساب، ثم سجّل الدخول.","Vérifiez votre e-mail pour confirmer le compte, puis connectez-vous."],err:["حدث خطأ: ","Erreur : "],noinst:["لا توجد مؤسسة مسجلة في قاعدة البيانات.","Aucun établissement enregistré."]};
+let L='ar',S={user:null,profile:null,tab:'home',joinType:'student',initiatives:[],rewards:[],institutions:[],reactions:[],reports:[],balance:0,ledger:[]},PH=[],CT='env',TH=localStorage.getItem('basma_theme')||'light';
 document.documentElement.dataset.theme=TH;
 const $=id=>document.getElementById(id),t=k=>K[k]?(K[k][L==='ar'?0:1]):k,esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const val=id=>($(id)||{}).value||'',nameInst=x=>L==='ar'?x.name_ar:x.name_fr,nameReward=x=>L==='ar'?x.name_ar:x.name_fr;
@@ -50,28 +51,72 @@ const topBar=()=>`<div class="top"><div class="logo">BASMA<small>بصمة</small
 const navItems={student:[['home','🏠'],['feed','📸'],['add','➕'],['mine','📋'],['rew','🎁'],['ach','🏅']],sup:[['home','📥'],['feed','📸'],['hist','🗂️']],dir:[['home','📊'],['feed','📸']],adm:[['home','📊'],['rew','🎁']]};
 function nav(){let r=appRole();return `<nav><div>${(navItems[r]||navItems.student).map(n=>`<button class="${S.tab===n[0]?'on':''}" onclick="go('${n[0]}')"><span>${n[1]}</span>${t(n[0])}</button>`).join('')}</div></nav>`}
 function go(x){S.tab=x;render()}
-function render(){let a=$('app');if(!S.user||!S.profile){a.innerHTML=topBar()+login();return}let r=appRole();let body=r==='student'?studentPage():r==='sup'?supervisorPage():r==='dir'?directorPage():adminPage();a.innerHTML=topBar()+`<div class="pg">${body}<p style="margin-top:18px"><button class="s" onclick="reportProblem()">⚑ ${t('report')}</button></p></div>`+nav()}
-function login(){return `<div class="lg"><div class="mark">👣</div><h1>بصمة | BASMA</h1><p style="color:var(--gold);font-weight:800">${t('slogan')}</p></div><div class="pg"><div class="card">${S.reg?`
-<label>${t('name')}</label><input id="fullName" maxlength="80" autocomplete="name">
-<label>${t('user')}</label><input id="username" maxlength="30" autocomplete="username">
-<label>${t('email')}</label><input id="email" type="email" autocomplete="email">
-<label>${t('school')}</label><select id="institution">${S.institutions.map(x=>`<option value="${x.id}">${esc(nameInst(x))}</option>`).join('')}</select>
-<label>${t('pw')}</label><input id="password" type="password" minlength="8" autocomplete="new-password">
-<label>${t('invite')}</label><input id="invite" maxlength="30">
-<button style="width:100%" onclick="register()">${t('reg')}</button>`:`
-<label>${t('email')}</label><input id="email" type="email" autocomplete="username">
-<label>${t('pw')}</label><input id="password" type="password" autocomplete="current-password">
-<label>${t('invite')}</label><input id="loginInvite" maxlength="30">
-<button style="width:100%" onclick="loginUser()">${t('login')}</button>`}
-<p style="margin-top:10px"><button class="s" onclick="S.reg=!S.reg;render()">${t(S.reg?'login':'reg')}</button></p></div><p class="mu">${t('note')}</p></div>`}
+function needsOnboarding(){return !!S.profile?.username?.startsWith('basma_')}
+function render(){
+ let a=$('app');
+ if(!S.user||!S.profile){a.innerHTML=topBar()+login();return}
+ if(needsOnboarding()){a.innerHTML=topBar()+`<div class="pg">${onboarding()}</div>`;return}
+ let r=appRole(),body=r==='student'?studentPage():r==='sup'?supervisorPage():r==='dir'?directorPage():adminPage();
+ a.innerHTML=topBar()+`<div class="pg">${body}<p style="margin-top:18px"><button class="s" onclick="reportProblem()">⚑ ${t('report')}</button></p></div>`+nav();
+}
+function login(){return `<div class="lg"><div class="mark">👣</div><h1>بصمة | BASMA</h1><p style="color:var(--gold);font-weight:800">${t('slogan')}</p></div><div class="pg"><div class="card"><button class="google" onclick="googleLogin()"><span class="gmark">G</span>${L==='ar'?'المتابعة باستخدام Google':'Continuer avec Google'}</button><p class="mu" style="margin-top:12px;text-align:center">${L==='ar'?'دخول آمن بحساب Google':'Connexion sécurisée avec Google'}</p></div><p class="mu">${t('note')}</p></div>`}
+async function googleLogin(){
+ const {error}=await db.auth.signInWithOAuth({provider:'google',options:{redirectTo:location.href.split(/[?#]/)[0]}});
+ if(error)err(error);
+}
+function setJoinType(v){S.joinType=v;render()}
+function onboarding(){
+ const staff=S.joinType==='staff';
+ return `<h2>${L==='ar'?'أهلاً بك في بصمة':'Bienvenue sur BASMA'}</h2>
+ <div class="card">
+ <p>${L==='ar'?'أكمل إعداد حسابك للمتابعة':'Complétez votre compte pour continuer'}</p>
+ <label>${L==='ar'?'اسم الحساب':'Identifiant'}</label>
+ <input id="newUsername" maxlength="30" placeholder="exemple_123" autocomplete="username">
+ <label>${L==='ar'?'نوع الحساب':'Type de compte'}</label>
+ <select onchange="setJoinType(this.value)">
+ <option value="student" ${!staff?'selected':''}>${t('student')}</option>
+ <option value="staff" ${staff?'selected':''}>${L==='ar'?'أستاذ أو مدير':'Enseignant ou directeur'}</option>
+ </select>
+ ${staff?`<label>${t('invite')}</label><input id="newInvite" maxlength="30">`:
+ `<label>${t('school')}</label><select id="newInstitution"><option value="">${L==='ar'?'اختر المؤسسة':'Choisir établissement'}</option>${S.institutions.map(x=>`<option value="${x.id}">${esc(nameInst(x))}</option>`).join('')}</select>`}
+ <button style="width:100%;margin-top:12px" onclick="completeOnboarding()">${L==='ar'?'حفظ ومتابعة':'Enregistrer et continuer'}</button>
+ </div>`;
+}
+async function completeOnboarding(){
+ const username=val('newUsername').trim().toLowerCase();
+ if(!/^[a-z0-9_]{3,30}$/.test(username)||username.startsWith('basma_')){toast(L==='ar'?'اسم الحساب: 3 إلى 30 حرفاً إنجليزياً أو رقماً أو _، ولا يبدأ بـ basma_':'Identifiant invalide : 3 à 30 caractères, sans le préfixe basma_');return}
+ if(S.joinType==='staff'){
+  const code=val('newInvite').trim();if(!code){toast(t('invite'));return}
+  const {error}=await db.rpc('claim_invite',{p_code:code});
+  if(error){toast(t('invbad')+' — '+(error.message||''));return}
+ }else{
+  const institution=val('newInstitution');if(!institution){toast(t('school'));return}
+  if(!S.profile.institution_id){
+   const {error}=await db.rpc('set_my_institution',{p_inst:institution});
+   if(error){err(error);return}
+  }
+ }
+ const {error}=await db.rpc('set_my_username',{p_username:username});
+ if(error){err(error);return}
+ await refreshSession();
+ toast(L==='ar'?'مرحباً بك في بصمة':'Bienvenue sur BASMA');
+}
 async function loadInstitutions(){const {data,error}=await db.from('institutions').select('id,name_ar,name_fr').order('name_ar');if(error)throw error;S.institutions=data||[]}
-async function register(){let full_name=val('fullName').trim(),username=val('username').trim().toLowerCase(),email=val('email').trim(),password=val('password'),institution_id=val('institution'),invite=val('invite').trim();if(full_name.length<2||username.length<3||!email||password.length<8||!institution_id){toast(t('fill'));return}if(!/^[a-z0-9_]{3,30}$/.test(username)){toast(L==='ar'?'المعرّف: حروف إنجليزية وأرقام وشرطة سفلية فقط':'Identifiant : lettres, chiffres et _ uniquement');return}
-const {data,error}=await db.auth.signUp({email,password,options:{data:{username,full_name,institution_id}}});if(error){err(error);return}
-if(data.session){if(invite){const {error:ie}=await db.rpc('claim_invite',{p_code:invite});if(ie){toast(t('invbad'));} }await refreshSession();}else{S.reg=false;render();toast(t('confirmmail'))}}
-async function loginUser(){let email=val('email').trim(),password=val('password'),invite=val('loginInvite').trim();if(!email||!password){toast(t('fill'));return}const {error}=await db.auth.signInWithPassword({email,password});if(error){toast(t('bad'));return}if(invite){const {error:ie}=await db.rpc('claim_invite',{p_code:invite});if(ie){toast(t('invbad'))} }await refreshSession()}
 async function logout(){await db.auth.signOut();S.user=null;S.profile=null;S.tab='home';render()}
-async function refreshSession(){const {data:{user}}=await db.auth.getUser();S.user=user;if(!user){S.profile=null;render();return}const {data,error}=await db.from('profiles').select('*').eq('id',user.id).maybeSingle();if(error){err(error);return}S.profile=data;if(!data){toast(L==='ar'?'لم يتم إنشاء الملف الشخصي. تحقق من إعداد قاعدة البيانات.':'Profil utilisateur introuvable.');return}S.tab='home';await loadData();render()}
-async function loadData(){let inst=S.profile.institution_id;let [ii,rr,ll,rx,reps]=await Promise.all([
+async function refreshSession(){
+ const {data:{user},error:userError}=await db.auth.getUser();
+ if(userError){err(userError);return}
+ S.user=user;
+ if(!user){S.profile=null;render();return}
+ const {data,error}=await db.from('profiles').select('*').eq('id',user.id).maybeSingle();
+ if(error){err(error);return}
+ S.profile=data;
+ if(!data){toast(L==='ar'?'لم يتم إنشاء الملف الشخصي. تحقق من إعداد قاعدة البيانات.':'Profil utilisateur introuvable.');render();return}
+ S.tab='home';
+ if(needsOnboarding()){render();return}
+ await loadData();render();
+  }
+  async function loadData(){let inst=S.profile.institution_id;let [ii,rr,ll,rx,reps]=await Promise.all([
 db.from('initiatives').select('*').order('created_at',{ascending:false}),
 db.from('rewards').select('*').eq('active',true),
 db.from('point_ledger').select('delta,student_id'),
@@ -84,7 +129,7 @@ function myInits(){return S.initiatives.filter(i=>i.student_id===S.user.id)}
 function balanceOf(uid){return (S.ledger||[]).filter(x=>x.student_id===uid).reduce((a,x)=>a+x.delta,0)}
 function images(i){return i.imgs?.length?`<div class="ph">${i.imgs.map(s=>`<img src="${esc(s)}" alt="">`).join('')}</div>`:''}
 function initCard(i,extra=''){let status=i.status;return `<div class="card">${images(i)}<div class="row sp"><h3>${esc(i.title)}</h3>${tag(status)}</div><p class="mu">${t(i.category)} • ${new Date(i.created_at).toLocaleDateString(L==='ar'?'ar-TN':'fr-FR')}</p>${i.description?`<p>${esc(i.description)}</p>`:''}${status==='approved'?`<p style="color:var(--gold);font-weight:800">+${i.points} ${t('pts')}</p>`:''}${i.review_note?`<p style="color:var(--rd)">${t('reason')}: ${esc(i.review_note)}</p>`:''}${extra}</div>`}
-function studentPage(){let mine=myInits(),approved=mine.filter(x=>x.status==='approved');if(S.tab==='feed')return feedPage();if(S.tab==='home')return `<h2>${t('hi')} ${esc(S.profile.full_name.split(' ')[0])}</h2><div class="card hero"><span>${t('bal')}</span><b>${S.balance} <i>${t('pts')}</i></b><p>${approved.length} ${t('ok')}</p></div><button style="width:100%" onclick="go('add')">➕ ${t('add')}</button><h2>${t('mine')}</h2>${mine.slice(0,3).map(i=>initCard(i)).join('')||`<p class="mu">${t('hold')}</p>`}`;
+function studentPage(){let mine=myInits(),approved=mine.filter(x=>x.status==='approved');if(S.tab==='feed')return feedPage();if(S.tab==='home')return `<h2>${t('hi')} ${esc((S.profile.full_name||'').split(' ')[0])}</h2><div class="card hero"><span>${t('bal')}</span><b>${S.balance} <i>${t('pts')}</i></b><p>${approved.length} ${t('ok')}</p></div><button style="width:100%" onclick="go('add')">➕ ${t('add')}</button><h2>${t('mine')}</h2>${mine.slice(0,3).map(i=>initCard(i)).join('')||`<p class="mu">${t('hold')}</p>`}`;
 if(S.tab==='add')return addForm();if(S.tab==='mine')return `<h2>${t('mine')}</h2>${mine.map(i=>initCard(i)).join('')||`<p class="mu">${t('hold')}</p>`}`;
 if(S.tab==='rew')return `<h2>${t('rew')}</h2><div class="card hero"><b>${S.balance} <i>${t('pts')}</i></b></div>${S.rewards.map(r=>`<div class="card row sp"><div><h3>${esc(nameReward(r))}</h3><span class="mu">${t('cost')}: ${r.cost}${r.stock===null?'':` • ${r.stock}`}</span></div><button ${S.balance<r.cost||r.stock===0?'disabled':''} onclick="redeem('${r.id}')">${t('redeem')}</button></div>`).join('')||`<p class="mu">${t('empty')}</p>`}`;
 let n=approved.length,e=approved.reduce((a,x)=>a+x.points,0),env=approved.filter(x=>x.category==='env').length,b=[[n>=1,'🌱','b1'],[n>=3,'⭐','b2'],[e>=100,'🏆','b3'],[env>=2,'🌳','b4']];return `<h2>${t('ach')}</h2><div class="card">${b.map(x=>`<p style="padding:8px;opacity:${x[0]?1:.35}">${x[1]} ${t(x[2])}</p>`).join('')}</div>`}
@@ -105,7 +150,21 @@ function feedPage(){let posts=S.initiatives.filter(i=>i.pub&&i.status==='approve
 async function react(id,emoji){let old=S.reactions.find(x=>x.initiative_id===id&&x.user_id===S.user.id);let result;if(old){result=await db.from('reactions').delete().eq('initiative_id',id).eq('user_id',S.user.id);if(result.error){err(result.error);return}if(old.emoji!==emoji){result=await db.from('reactions').insert({initiative_id:id,user_id:S.user.id,emoji})}}else{result=await db.from('reactions').insert({initiative_id:id,user_id:S.user.id,emoji})}if(result.error){err(result.error);return}await loadData();render()}
 async function hidePost(id){let {error}=await db.rpc('unpublish_initiative',{p_id:id});if(error){err(error);return}await loadData();render()}
 async function reportProblem(){let message=prompt(t('repq'));if(!message?.trim())return;let {error}=await db.from('reports').insert({user_id:S.user.id,message:message.trim().slice(0,500)});if(error){err(error);return}toast(t('repok'))}
-async function init(){try{await loadInstitutions();const {data:{session}}=await db.auth.getSession();if(session)await refreshSession();else render();}catch(e){render();err(e)}}
-db.auth.onAuthStateChange(async(_event,session)=>{if(session&&!S.profile){setTimeout(()=>refreshSession(),0)}else if(!session){S.user=null;S.profile=null;render()}});
+async function init(){
+ try{
+  await loadInstitutions();
+  const {data:{session}}=await db.auth.getSession();
+  if(session)await refreshSession();else render();
+ }catch(e){render();err(e)}
+}
+let authRefreshRunning=false;
+db.auth.onAuthStateChange((_event,session)=>{
+ if(session&&!authRefreshRunning){
+  authRefreshRunning=true;
+  setTimeout(async()=>{try{await refreshSession()}finally{authRefreshRunning=false}},0);
+ }else if(!session){
+  S.user=null;S.profile=null;render();
+ }
+});
 init();
 </script></body></html>
